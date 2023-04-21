@@ -1,5 +1,5 @@
 #!/bin/bash
 
 cd /home/ubuntu
-npm --force install
-yarn --force install
+npm -f install
+yarn -f install
