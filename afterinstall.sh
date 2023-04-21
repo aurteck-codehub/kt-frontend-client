@@ -1,5 +1,5 @@
 #!/bin/bash
 
 cd /home/ubuntu
-npm -f install
-yarn -f install
+sudo apt install npm -y
+sudo apt install yarn -y
