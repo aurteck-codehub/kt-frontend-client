@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /var/www/html
+cd /home/ubuntu/prod
 npm run dev
 yarn dev
 
