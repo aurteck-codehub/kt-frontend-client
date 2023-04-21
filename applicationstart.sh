@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /home/ubuntu/usr/
+cd /usr/share/nginx/html
 npm run dev
