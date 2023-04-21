@@ -1,5 +1,7 @@
 #!/bin/bash
 
 cd /home/ubuntu
-npm -f install
-yarn -f install
+npm run dev
+npm run build
+npm start
+
