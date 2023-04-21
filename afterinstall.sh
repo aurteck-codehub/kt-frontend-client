@@ -1,6 +1,7 @@
 #!/bin/bash
 cd /usr/share/nginx/html
 npm install
+next dev
 npm install next
 npm install -g sass
 npm run dev
