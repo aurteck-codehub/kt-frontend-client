@@ -1,4 +1,6 @@
 #!/bin/bash
+sudo apt-get install git -y
+git init
 export NVM_DIR="/root/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 cd /usr/share/nginx/html
