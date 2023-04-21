@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cd /home/ubuntu
+cd /usr/share/nginx/html
 npm --force install
 yarn --force install
