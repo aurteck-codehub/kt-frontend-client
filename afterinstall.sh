@@ -4,6 +4,7 @@ export NVM_DIR="/root/.nvm"
 cd /usr/share/nginx/html
 /root/.nvm/versions/node/v18.16.0/bin/npm install husky --save-dev
 /root/.nvm/versions/node/v18.16.0/bin/sudo apt-get install git -y
+/root/.nvm/versions/node/v18.16.0/bin/npm run prepare
 /root/.nvm/versions/node/v18.16.0/bin/git init
 /root/.nvm/versions/node/v18.16.0/bin/npm install
 /root/.nvm/versions/node/v18.16.0/bin/npm install next
