@@ -21,3 +21,8 @@ hooks:
     - location: src/applicationstart.sh
       runas: ubuntu
       timeout: 100 
+    - name: Deploy
+      image: my-image:latest
+      script:
+        - export CONFIG=$(cat config.json | jq -r '.')
+        - echo "Deploying with config: $CONFIG
