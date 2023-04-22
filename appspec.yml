@@ -10,14 +10,14 @@ permissions:
     group: ubuntu
 hooks:
   BeforeInstall:
-    - location: BeforeInstall.sh
+    - location: src/BeforeInstall.sh
       runas: ubuntu
       timeout: 100
   AfterInstall:
-    - location: AfterInstall.sh
+    - location: src/AfterInstall.sh
       runas: ubuntu
       timeout: 100
   ApplicationStart:
-    - location: applicationstart.sh
+    - location: src/applicationstart.sh
       runas: ubuntu
       timeout: 100 
