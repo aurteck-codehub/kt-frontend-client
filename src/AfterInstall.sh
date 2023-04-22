@@ -2,7 +2,7 @@
 cd /var/www/html/production
 export NVM_DIR="/root/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-sudo chmod +x /root/.nvm/versions/node/v18.16.0/bin/git
+sudo chmod +x /usr/bin/git
 sudo chmod +x /root/.nvm/versions/node/v18.16.0/bin/next
 sudo chmod +x /root/.nvm/versions/node/v18.16.0/bin/npm
 /root/.nvm/versions/node/v18.16.0/bin/npm install husky --save-dev
