@@ -1,9 +1,10 @@
 #!/bin/bash
 cd /var/www/html/production
+sudo npm uninstall -g npm
+sudo npm install -g npm@latest
 npm install husky --save-dev
 sudo apt-get install git -y
 git init
-sudo apt-get install npm -y
 npm run prepare
 npm install -g npm
 sudo chown -R $(whoami) ~/.npm
