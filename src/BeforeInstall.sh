@@ -7,5 +7,5 @@ sudo apt-get install npm -y
 npm run prepare
 npm install -g npm
 npm install next
-npm install -g sass
+sudo npm install -g sass
 
