@@ -1,4 +1,5 @@
 #!/bin/bash
+
 cd /var/www/html/production
 export PATH="$PATH:/root/.nvm/versions/node/v18.16.0/bin/"
 sudo chown -R ubuntu:ubuntu /root/.nvm   
@@ -14,3 +15,4 @@ sudo /usr/local/bin/chmod +x next
 sudo /usr/local/bin/npm install -g sass
 sudo /usr/local/bin/next build
 sudo /usr/local/bin/npm run dev
+sudo npm install react react-dom
