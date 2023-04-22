@@ -6,12 +6,14 @@ sudo chmod -R 755 /root/.nvm
 sudo /root/.nvm/versions/node/v18.16.0/bin/npm install husky --save-dev
 sudo /usr/bin/git
 sudo /usr/bin/git init
-sudo /root/.nvm/versions/node/v18.16.0/bin/npm run prepare
-sudo /root/.nvm/versions/node/v18.16.0/bin/next dev
-sudo /root/.nvm/versions/node/v18.16.0/bin/next build
-sudo /root/.nvm/versions/node/v18.16.0/bin/next start
-sudo /root/.nvm/versions/node/v18.16.0/bin/npm run build
-sudo /root/.nvm/versions/node/v18.16.0/bin/chmod +x next
-sudo /root/.nvm/versions/node/v18.16.0/bin/npm install -g sass
-sudo /root/.nvm/versions/node/v18.16.0/bin/npm run build
-sudo /root/.nvm/versions/node/v18.16.0/bin/npm run dev
+sudo /usr/bin/npm
+sudo /usr/local/bin/next
+sudo sudo /usr/bin/npm run prepare
+sudo /usr/local/bin/next dev
+sudo /usr/local/bin/next build
+sudo /usr/local/bin/next start
+sudo /usr/local/bin/npm run build
+sudo /usr/local/bin/chmod +x next
+sudo /usr/local/bin/npm install -g sass
+sudo /usr/local/bin/next/npm run build
+sudo /usr/local/bin/npm run dev
