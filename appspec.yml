@@ -3,10 +3,21 @@ os: linux
 files:
   - source: /
     destination: /var/www/html/production
+permissions:
+  - object: /var/www/html/production
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
 hooks:
+  BeforeInstall:
+    - location: applicationstart.sh
+      runas: ubuntu
+      timeout: 100
   AfterInstall:
     - location: afterinstall.sh
+      runas: ubuntu
       timeout: 100
   ApplicationStart:
     - location: applicationstart.sh
-      timeout: 100
+      runas: ubuntu
+      timeout: 100    
