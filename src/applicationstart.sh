@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd /var/www/html/production
-npm install
-npm start
-npm run dev
-npm install react react-dom
+sudo npm install
+sudo npm start
+sudo npm run dev
+sudo npm install react react-dom
