@@ -1,13 +1,12 @@
 #!/bin/bash
 cd /var/www/html/production
-export NVM_DIR="/root/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+export PATH="$PATH:/root/.nvm/versions/node/v18.16.0/bin/"
 sudo chown -R ubuntu:ubuntu /root/.nvm   
 sudo chmod -R 755 /root/.nvm
 sudo /root/.nvm/versions/node/v18.16.0/bin/npm install husky --save-dev
-sudo /root/.nvm/versions/node/v18.16.0/bin/apt-get install git -y
+sudo /usr/bin/git
+sudo /usr/bin/git init
 sudo /root/.nvm/versions/node/v18.16.0/bin/npm run prepare
-sudo /root/.nvm/versions/node/v18.16.0/bin/git init
 sudo /root/.nvm/versions/node/v18.16.0/bin/next dev
 sudo /root/.nvm/versions/node/v18.16.0/bin/next build
 sudo /root/.nvm/versions/node/v18.16.0/bin/next start
