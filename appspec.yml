@@ -25,4 +25,4 @@ hooks:
       image: my-image:latest
       script:
         - export CONFIG=$(cat config.json | jq -r '.')
-        - echo "Deploying with config: $CONFIG
+        - echo "Deploying with config: $CONFIG"
