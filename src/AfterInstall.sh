@@ -2,6 +2,8 @@
 cd /var/www/html/production
 export NVM_DIR="/root/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+sudo chown -R ubuntu:ubuntu /root/.nvm   
+sudo chmod -R 755 /root/.nvm
 /root/.nvm/versions/node/v18.16.0/bin/npm install husky --save-dev
 /root/.nvm/versions/node/v18.16.0/bin/sudo apt-get install git -y
 /root/.nvm/versions/node/v18.16.0/bin/npm run prepare
