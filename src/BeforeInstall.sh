@@ -7,6 +7,6 @@ sudo apt-get install npm -y
 npm run prepare
 npm install -g npm
 sudo chown -R $(whoami) ~/.npm
-npm install next
+sudo apt-get install next -y
 sudo npm install -g sass
 
