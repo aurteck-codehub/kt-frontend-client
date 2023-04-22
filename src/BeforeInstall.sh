@@ -1,5 +1,7 @@
 #!/bin/bash
 cd /var/www/html/production
+npm install -g npm@latest
+nvm install node
 npm install husky --save-dev
 sudo apt-get install git -y
 git init
