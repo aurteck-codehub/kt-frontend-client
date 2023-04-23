@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /var/www/html/production
+cd /home/ubuntu/frontend
 npm install -g npm@latest
 nvm install node
 npm install husky --save-dev
