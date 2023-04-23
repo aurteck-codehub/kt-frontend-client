@@ -2,9 +2,9 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /var/www/html/production
+    destination: /home/ubuntu/frontend
 permissions:
-  - object: /var/www/html/production
+  - object: /home/ubuntu/frontend
     pattern: "**"
     owner: ubuntu
     group: ubuntu
