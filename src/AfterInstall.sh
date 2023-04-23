@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /var/www/html/production
+cd /home/ubuntu/frontend
 export PATH="$PATH:/root/.nvm/versions/node/v18.16.0/bin/"
 sudo chown -R ubuntu:ubuntu /root/.nvm   
 sudo chmod -R 755 /root/.nvm
