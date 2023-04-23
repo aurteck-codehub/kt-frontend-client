@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /var/www/html/production
+cd /home/ubuntu/frontend
 sudo npm install
 sudo npm start
 sudo npm run dev
