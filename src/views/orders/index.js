@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Grid,
   TableBody,
@@ -18,9 +18,51 @@ import Table from "@/components/Table";
 import Iconify from "@/components/iconify";
 import Label from "@/components/label";
 import { gridSpacing, allOrders } from "@/utils";
+import { makeStyles } from "@mui/styles";
+import axios from "axios";
+import { API_URL } from "../../configuration";
+
+const TABLE_HEAD = [
+  { id: "id", label: "Order ID" },
+  { id: "created", label: "Placed On" },
+  { id: "item", label: "Item", alignRight: false, isNumber: true },
+  {
+    id: "fulfillment",
+    label: "Fulfillment",
+    alignRight: false,
+    isNumber: true,
+  },
+  { id: "quantity", label: "Quantity", alignRight: false },
+  { id: "totalPrice", label: "Total Price", alignRight: false },
+  { id: "status", label: "Status", alignRight: false },
+  { id: "updated", label: "Updated", alignRight: false },
+  { id: "" },
+];
+
+const useRowStyles = makeStyles({
+  root: ({ open }) => ({
+    borderRadius: '5px'
+  }),
+  tableBody: {
+    "& > :not(:last-child)": {
+      borderBottom: "5px solid #EDF1F5",
+    }
+  }
+});
+
 const OrdersView = () => {
   const [selected, setSelected] = useState([]);
   const [open, setOpen] = useState(null);
+  const [orders, setOrders] = useState([]);
+  const classes = useRowStyles();
+
+  useEffect(() => {
+    const user = JSON?.parse(localStorage.getItem('profile'))
+    axios.get(`${API_URL}/order/user/${user?.user_id}`)
+    .then((res) => {
+      setOrders(res?.data);
+    })
+  },[])
 
   const handleDeleteClick = (id) => {};
   const handleEditClick = (id) => {};
@@ -49,45 +91,28 @@ const OrdersView = () => {
     }
     setSelected(newSelected);
   };
-  const TABLE_HEAD = [
-    { id: "id", label: "Order ID", alignRight: false },
-    { id: "created", label: "Placed On", alignRight: false },
-    { id: "item", label: "Item", alignRight: false, isNumber: true },
-    {
-      id: "fulfillment",
-      label: "Fulfillment",
-      alignRight: false,
-      isNumber: true,
-    },
-    { id: "quantity", label: "Quantity", alignRight: false },
-    { id: "totalPrice", label: "Total Price", alignRight: false },
-    { id: "status", label: "Status", alignRight: false },
-    { id: "updated", label: "Updated", alignRight: false },
-    { id: "" },
-  ];
+  
   return (
     <MainCard title="My Orders" darkTitle>
       <Table
         tableHead={TABLE_HEAD}
-        data={allOrders}
+        data={orders}
         handleDeleteClick={handleDeleteClick}
         handleEditClick={handleEditClick}
         showActions
         selected={selected}
         setSelected={setSelected}
       >
-        <TableBody>
-          {allOrders?.map((row) => {
+        <TableBody className={classes.tableBody}>
+          {orders?.map((row) => {
             const {
               id,
-              created,
-              avatarUrl,
-              item,
-              fulfillment,
+              order_id,
               quantity,
-              totalPrice,
-              status,
-              updated,
+              price,
+              Order,
+              Product,
+              updatedAt
             } = row;
             const selectedRow = selected.indexOf(row.id) !== -1;
             return (
@@ -97,6 +122,7 @@ const OrdersView = () => {
                 tabIndex={-1}
                 role="checkbox"
                 selected={selectedRow}
+                className={classes.root}
               >
                 <TableCell padding="checkbox">
                   <Checkbox
@@ -104,30 +130,27 @@ const OrdersView = () => {
                     onChange={(event) => handleClick(event, id)}
                   />
                 </TableCell>
-                <TableCell>
-                  <Typography>{id}</Typography>
+                <TableCell sx={{padding: '2px 16px 2px 16px'}}>
+                  <Typography>{order_id}</Typography>
                 </TableCell>
-                <TableCell>
-                  <Typography>{created}</Typography>
+                <TableCell sx={{padding: '2px 16px 2px 16px'}}>
+                  <Typography>{Order?.order_date}</Typography>
                 </TableCell>
-                <TableCell component="th" scope="row" padding="none">
-                  <Stack direction="row" alignItems="center" spacing={2}>
-                    <Avatar alt={item} src={avatarUrl} />
-                    <Typography variant="subtitle2" noWrap>
-                      {item}
+                <TableCell sx={{padding: '2px 16px 2px 16px'}}>
+                    <Typography>
+                      {Product?.name}
                     </Typography>
-                  </Stack>
                 </TableCell>
-                <TableCell align="left">
-                  <Label label={fulfillment} color="primary" />
+                <TableCell sx={{padding: '2px 16px 2px 16px'}}>
+                  <Label label={'fullfilment'} color="primary" />
                 </TableCell>
-                <TableCell align="left">{quantity}</TableCell>
-                <TableCell align="left">{totalPrice}</TableCell>
-                <TableCell align="left">
-                  <Label label={status} color="primary" />
+                <TableCell sx={{padding: '2px 16px 2px 16px'}}>{quantity}</TableCell>
+                <TableCell sx={{padding: '2px 16px 2px 16px'}}>{price}</TableCell>
+                <TableCell sx={{padding: '2px 16px 2px 16px'}}>
+                  <Label label={Order?.status} color="primary" />
                 </TableCell>
-                <TableCell align="left">{updated}</TableCell>
-                <TableCell align="right">
+                <TableCell sx={{padding: '2px 16px 2px 16px'}}>{updatedAt}</TableCell>
+                <TableCell sx={{padding: '2px 16px 2px 16px'}}>
                   <IconButton
                     size="large"
                     color="inherit"

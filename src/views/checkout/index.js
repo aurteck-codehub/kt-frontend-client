@@ -1,21 +1,21 @@
 "use client";
 import { Grid, Container, Box, Typography } from "@mui/material";
 import Cart from "./cart";
-import useSWR from "swr";
 import Details from "./details";
 import ProductSlider from "../products/ProductSlider";
 import { API_URL } from "@/configuration";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { useRouter } from "next/navigation";
 
 const CheckOut = () => {
+  const router = useRouter();
   const [contact, setContact] = useState({auth_user_id: '', name: '', address: '', city: '', state: '', phone_number: '', area_id: ''})
   const [shippingAddress, setShippingAddress] = useState({auth_user_id: '', name: '', address: '', city: '', state: '', phone_number: '', area_id: ''})
   const [order, setOrder] = useState({tracking: '1234', auth_user_id: '', order_date: '', total_amount: 0, status: 'pending' })
   const [invoice, setInvoice] = useState({order_id: '', auth_user_id: '', amount: 0})
   const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([]);
   const [id, setId] = useState();
 
   useEffect(() => {
@@ -33,6 +33,10 @@ const CheckOut = () => {
       setContact({...contact, area_id: res?.data?.area_id})
       setShippingAddress({...shippingAddress, area_id: res?.data?.area_id})
     })
+    axios.get(`${API_URL}/product`)
+    .then((res) => {
+      setProducts(res?.data)
+    })
   },[])
 
   console.log({id})
@@ -40,18 +44,10 @@ const CheckOut = () => {
   const totalPrice = cart?.reduce((sum, item) => sum + parseFloat(item?.Product?.price), 0)
   const num = cart?.length;
 
-  const { data } = useSWR(`${API_URL}/product`, fetcher)
-
   const handleSubmit = async(e) => {
     e.preventDefault();
     axios.post(`${API_URL}/contact`, {...contact, auth_user_id: id})
-    // .then((res) => {
-    //   console.log(res)
-    // })
     axios.post(`${API_URL}/shippingaddress`, {...shippingAddress, auth_user_id: id})
-    // .then((res) => {
-    //   console.log(res)
-    // })
     try {
       const orderRes = await axios.post(`${API_URL}/order`, {...order, total_amount: totalPrice+119, auth_user_id: id})
       for (const item of cart) {
@@ -61,8 +57,10 @@ const CheckOut = () => {
           quantity: item?.quantity,
           price: item?.Product?.price,
         })
+        await axios.delete(`${API_URL}/shoppingcartitem/${item?.id}`)
       }
       await axios.post(`${API_URL}/invoice`, {...invoice, order_id: orderRes?.data?.id, amount: totalPrice+119, auth_user_id: id})
+      router.push('/conformation')
     } catch (error) {
       console.log(error)
     }
@@ -105,7 +103,7 @@ const CheckOut = () => {
         </Typography>
       </Grid>
       <Box mt={5}>
-        <ProductSlider data={!data ? [] : data?.products}/>
+        <ProductSlider data={!products ? [] : products?.products}/>
       </Box>
     </Box>
   </Container>

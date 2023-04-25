@@ -23,7 +23,7 @@ const Dashboard = () => {
     <Container maxWidth="xl">
       <Grid container gap={6}>
         <Suspense fallback={<FallBackLoader />}>
-          <Categories />
+          <Categories gri={3}/>
         </Suspense>
         <Grid item xs={12} md={8}>
           <Suspense fallback={<FallBackLoader />}>

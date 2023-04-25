@@ -10,8 +10,28 @@ import {
   CardContent,
 } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { API_URL } from "../configuration";
 
 const Product = ({ index, item, link }) => {
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${API_URL}/review/product/${item?.id}`)
+    .then((res) => {
+      setReviews(res?.data?.data);
+    })
+  },[])
+  
+  const numReviews = reviews.length;
+  let totalRating = 0;
+
+  for (let i = 0; i < numReviews; i++){
+    totalRating += reviews[i].rating;
+  }
+
+  const averageRating = totalRating / numReviews;
   return (
     <Link style={{ textDecoration: "none" }} href={`/product/${item?.id}`}>
       <Card>
@@ -36,14 +56,14 @@ const Product = ({ index, item, link }) => {
             <Stack direction={"row"}>
               <Rating
                 name="text-feedback"
-                value={62}
+                value={averageRating}
                 readOnly
                 precision={0.5}
                 emptyIcon={
                   <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
                 }
               />
-              <Box sx={{ ml: 2 }}>(82)</Box>
+              <Box sx={{ ml: 2 }}>({numReviews})</Box>
             </Stack>
           </Stack>
         </CardContent>

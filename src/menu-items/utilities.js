@@ -5,6 +5,7 @@ import {
   IconTags,
   IconBrandCodesandbox,
   IconUser,
+  IconThumbUp,
 } from "@tabler/icons-react";
 import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 
@@ -15,6 +16,7 @@ const icons = {
   IconWindmill,
   IconFileInvoice,
   IconTags,
+  IconThumbUp,
   StorefrontOutlinedIcon,
 };
 
@@ -37,6 +39,14 @@ const utilities = {
       type: "item",
       url: "/dashboard/orders",
       icon: icons.IconBrandCodesandbox,
+      breadcrumbs: false,
+    },
+    {
+      id: "util-ratings",
+      title: "Rating & Reviews",
+      type: "item",
+      url: "/dashboard/rating",
+      icon: icons.IconThumbUp,
       breadcrumbs: false,
     },
     {

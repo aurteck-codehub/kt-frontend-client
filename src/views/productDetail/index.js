@@ -30,7 +30,12 @@ const ProductDetail = ({id}) => {
   const router = useRouter();
   const [isReadMore, setIsReadMore] = useState(true);
   const [quantity, setQuantity] = useState(1);
+  const [reviews, setReviews] = useState([]);
   const [shoppingcart, setShoppingCart] = useState([]);
+  const [detail, setDetail] = useState([]);
+  const [discount, setDiscount] = useState([]);
+  const [diffBrand, setDiffBrand] = useState([]);
+  const [sameBrand, setSameBrand] = useState([]);
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
@@ -41,11 +46,40 @@ const ProductDetail = ({id}) => {
     .then((res) => {
       setShoppingCart(res?.data)
     })
+    axios.get(`${API_URL}/product/${id}`)
+    .then((res) => {
+      setDetail(res?.data)
+      axios.get(`${API_URL}/product/${res?.data?.Brand?.id}/${res?.data?.Category?.id}`)
+      .then((res) => {
+        setDiffBrand(res?.data?.products);
+      })
+      axios.get(`${API_URL}/product/brand/${res?.data?.Brand?.id}`)
+      .then((res) => {
+        setSameBrand(res?.data?.products);
+      })
+    })
+    axios.get(`${API_URL}/discount/p/${id}`)
+    .then((res) => {
+      setDiscount(res?.data)
+    })
+    axios.get(`${API_URL}/review/product/${id}`)
+    .then((res) => {
+      setReviews(res?.data?.data);
+    })
   },[])
 
-  const { data } = useSWR(`${API_URL}/product/${id}`, fetcher)
-  const { data: discount } = useSWR(`${API_URL}/discount/p/${id}`, fetcher)
+  const numReviews = reviews.length;
+  let totalRating = 0;
 
+  for (let i = 0; i < numReviews; i++){
+    totalRating += reviews[i].rating;
+  }
+
+  const averageRating = totalRating / numReviews;
+
+  // const { data } = useSWR(`${API_URL}/product/${id}`, fetcher)
+  // const { data: discount } = useSWR(`${API_URL}/discount/p/${id}`, fetcher)
+  console.log({sameBrand})
   const handleClick = (e) => {
     console.log('clicked')
     e.preventDefault();
@@ -75,7 +109,7 @@ const ProductDetail = ({id}) => {
         >
           <Image
             // src="https://via.placeholder.com/1000"
-            src={data?.image_url}
+            src={detail?.image_url}
             alt="product-image"
             fill
           />
@@ -85,17 +119,17 @@ const ProductDetail = ({id}) => {
             variant="h1"
             sx={{ textTransform: "capitalize", mb: "12px" }}
           >
-            {data?.name}
+            {detail?.name}
           </Typography>
           <Grid container alignItems="center" mb={3}>
             <Rating
-              value={productDetailData.rating}
+              value={averageRating}
               readOnly
               precision={0.1}
               size="small"
             />
             <Typography variant="caption" sx={{ ml: 1, color: "custom.gray" }}>
-              ({productDetailData.rating})
+              ({numReviews})
             </Typography>
           </Grid>
           <Typography variant="subtitle1" fontWeight={700}>
@@ -105,7 +139,7 @@ const ProductDetail = ({id}) => {
               sx={{ ml: 1, color: "custom.red" }}
               fontWeight="bold"
             >
-              {data?.Brand?.name}
+              {detail?.Brand?.name}
             </Typography>
           </Typography>
           <Typography
@@ -116,7 +150,7 @@ const ProductDetail = ({id}) => {
           >
             <NumericFormat
               thousandsGroupStyle="thousand"
-              value={data?.price || 0}
+              value={detail?.price || 0}
               prefix="Rs"
               decimalSeparator="."
               displayType="text"
@@ -145,7 +179,7 @@ const ProductDetail = ({id}) => {
               allowLeadingZeros={false}
             />
             <Typography ml={3} color="black" as="span">
-              -{!discount?.discount_amount ? 0 : ((discount?.discount_amount / data?.price) * 100).toFixed(2)}%
+              -{!discount?.discount_amount ? 0 : ((discount?.discount_amount / detail?.price) * 100).toFixed(2)}%
             </Typography>
           </Typography>
           <Stack direction={"row"} alignItems="center" mt={2}>
@@ -185,9 +219,6 @@ const ProductDetail = ({id}) => {
             >
               Buy now
             </Button>
-            {/* <Button onClick={(e) => handleClick(e)}>
-              Add to cart
-            </Button> */}
             <PrimaryButton onClick={(e) => handleClick(e)}>Add to cart</PrimaryButton>
           </Stack>
         </Grid>
@@ -196,8 +227,8 @@ const ProductDetail = ({id}) => {
         <Typography variant="h4">Description:</Typography>
         <Typography variant="body1" color="black">
           {isReadMore
-            ? data?.description.slice(0, 200)
-            : data?.description}
+            ? detail?.description?.slice(0, 200)
+            : detail?.description}
           <Typography
             variant="subtitle1"
             onClick={toggleReadMore}
@@ -211,13 +242,13 @@ const ProductDetail = ({id}) => {
         <Typography variant="h4" fontWeight={"bold"} mb={3}>
           Rating & reviews
         </Typography>
-        <RatingAndSlider rating={3.5} totalReviews={82} />
-        {[...new Array(4)].map((item, index) => (
+        <RatingAndSlider rating={averageRating} totalReviews={numReviews} />
+        {reviews?.map((item, index) => (
           <ClientReviews
             key={index}
             name="Client Name"
-            rating={3}
-            review="Client descriptive review goes here if there is any "
+            rating={item?.rating}
+            review={item?.review_text}
           />
         ))}
       </Stack>
@@ -258,7 +289,7 @@ const ProductDetail = ({id}) => {
           </Typography>
         </Grid>
         <Box mt={5}>
-          <ProductSlider />
+          <ProductSlider data={diffBrand}/>
         </Box>
       </Box>
       <Box py={5} mb={10}>
@@ -292,7 +323,7 @@ const ProductDetail = ({id}) => {
           </Typography>
         </Grid>
         <Box mt={5}>
-          <ProductSlider />
+          <ProductSlider data={sameBrand}/>
         </Box>
       </Box>
     </Container>

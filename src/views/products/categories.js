@@ -157,7 +157,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import { API_URL } from "@/configuration";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
-const Categories = () => {
+const Categories = ({gri}) => {
   const { data } = useSWR(`${API_URL}/category/`, fetcher);
   // const [expanded, setExpanded] = useState(false);
 
@@ -169,11 +169,11 @@ const Categories = () => {
   const handleAccordionChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
+  console.log({data})
   return (
     <Grid
       item
-      xs={3}
+      xs={gri}
       display={{ xs: "none", md: "flex" }}
       container
       justifyContent={"center"}
@@ -213,41 +213,41 @@ const Categories = () => {
               //   expanded ? <ExpandLess /> : <ExpandMore color="primary" />
               // }
             >
-              <NextLink
-                href={`/categories/${category.slug}` ?? "#"}
-                style={{ textDecoration: "none" }}
+              <div
+                // href={"#"}
+                // style={{ textDecoration: "none" }}
               >
                 <Typography color="primary" fontWeight={"bold"}>
                   {category.title}
                 </Typography>
-              </NextLink>
+              </div>
             </AccordionSummary>
             {category.children?.map((item) => (
-              <AccordionDetails key={item.id}>
+              <AccordionDetails key={item?.id}>
                 {item.subitems != null ? (
                   <Box>
                     <List disablePadding>
                       <ListItem sx={{ pl: 2 }}>
                         <NextLink
-                          href={`/categories/${item.slug}` ?? "#"}
+                          href={`/categories/${item?.slug}` ?? "#"}
                           style={{ textDecoration: "none" }}
                         >
                           <Typography color="primary" variant="subtitle1">
-                            {item.name}
+                            {item?.name}
                           </Typography>
                         </NextLink>
                       </ListItem>
-                      {item.subitems.map((sitem) => (
+                      {item?.subitems?.map((sitem) => (
                         <ListItem key={sitem.id} sx={{ pl: 5 }}>
                           <NextLink
-                            href={`/categories/${sitem.slug}` ?? "#"}
+                            href={`/categories/${sitem?.slug}` ?? "#"}
                             style={{ textDecoration: "none" }}
                           >
                             <Typography
                               color="primary"
                               variant="subtitle2"
                             >
-                              {sitem.name}
+                              {sitem?.name}
                             </Typography>
                           </NextLink>
                         </ListItem>
@@ -258,7 +258,7 @@ const Categories = () => {
                   <List disablePadding>
                     <ListItem>
                       <NextLink
-                        href={`/categories/${item.slug}` ?? "#"}
+                        href={`/categories/${item?.id}` ?? "#"}
                         style={{ textDecoration: "none" }}
                       >
                         <Typography color="primary" variant="subtitle1">

@@ -1,6 +1,6 @@
 "use client";
 import styles from "./navbar.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import NextLink from "next/link";
@@ -24,6 +24,8 @@ import LogoIcon from "@/assets/icons/logo.svg";
 import { inter } from "@/assets/fonts";
 import { NAV_ITEMS, hideLayoutRoutes } from "@/utils";
 import Sidebar from "../Sidebar";
+import axios from "axios";
+import { API_URL } from "@/configuration";
 
 const settings = [
   { title: "Dashboard", href: "/dashboard" },
@@ -38,6 +40,21 @@ const Navbar = () => {
   const isLayoutNeeded = !hideLayoutRoutes.includes(segment);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [user, setUser] = useState()
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const profile = JSON?.parse(localStorage.getItem('profile'))
+    setUser(profile)
+    axios.get(`${API_URL}/shoppingcart/auth/${profile?.user_id}`)
+    .then((res) => {
+      axios.get(`${API_URL}/shoppingcartitem/cart/${res?.data?.id}`)
+      .then((res) => {
+        setCart(res?.data)
+      })
+    })
+  },[])
+
   const handleOpenNavMenu = (event) => {
     setOpenDrawer(true);
   };
@@ -129,11 +146,11 @@ const Navbar = () => {
                 })}
               </Box>
               <Box sx={{ flexGrow: 0 }}>
-                {data?.user ? (
+                {user ? (
                   <>
                     <NextLink href="/cart">
                       <IconButton aria-label="cart" sx={{ mr: 3 }} size="large">
-                        <Badge badgeContent={4} color="error">
+                        <Badge badgeContent={cart?.length} color="error">
                           <ShoppingCartIcon size={24} color="primary" />
                         </Badge>
                       </IconButton>

@@ -1,4 +1,15 @@
+'use client';
+import { usePathname } from "next/navigation";
+import CategoriesSearch from "../../../../views/category";
+
 const category = () => {
-  return <div style={{ marginTop: 75 }}>Category page</div>;
+  const pathname = usePathname();
+  const subCatId = pathname?.split('/')?.pop();
+  console.log('sub id ', subCatId);
+  return (
+    <div style={{ marginTop: 75 }}>
+    <CategoriesSearch id={subCatId}/>
+    </div>
+  )
 };
 export default category;

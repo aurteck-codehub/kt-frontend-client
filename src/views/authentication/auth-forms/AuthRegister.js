@@ -21,17 +21,24 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { strengthColor, strengthIndicator } from "@/utils";
 import { Input, AnimateButton } from "@/components";
 import { FiCamera } from "react-icons/fi";
-import UploadImageModal from "./UploadImageModal";
 import axios from "axios";
 import { API_URL } from "@/configuration";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const AuthRegister = () => {
-  const router = useRouter;
+  const router = useRouter();
   const [area, setArea] = useState([]);
   const [level, setLevel] = useState();
   const [showPassword, setShowPassword] = useState(false);
-  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [frontFile, setFrontFile] = useState(null);
+  const [file, setFile] = useState(null);
+
+  const handleFrontFileChange = (e) => {
+    setFrontFile(e.target.files[0]);
+  }
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -56,13 +63,6 @@ const AuthRegister = () => {
       console.log(err)
     ))
   }, []);
-
-  const frontSideClick = () => {
-    setShowUploadModal(true);
-  };
-  const backSideClick = () => {
-    setShowUploadModal(true);
-  };
 
   return (
     <>
@@ -104,11 +104,18 @@ const AuthRegister = () => {
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           console.log({values})
           try {
+            const formData = new FormData();
+            for(let value in values) {
+              formData.set(value, values[value])
+            }
+            formData.append('image1', frontFile)
+            formData.append('image2', file)
+            await
             axios
-              .post(`${API_URL}/auth/register`, values)
+              .post(`${API_URL}/auth/register`, formData)
               .then((res) => {
                 localStorage.setItem('user', JSON?.stringify(res?.data?.user))
-                localStorage.setItem('profile', JSON?.stringify(res?.data?.userProfile))
+                localStorage.setItem('profile', JSON?.stringify(res?.data?.profile))
                 localStorage.setItem('token', res?.data?.token)
                 setStatus({ success: false });
                 setSubmitting(false);
@@ -168,7 +175,6 @@ const AuthRegister = () => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="Demo Inc."
-                    inputProps={{}}
                   />
                   {touched.store_name && errors.store_name && (
                     <FormHelperText error id="helper-text-storename-signup">
@@ -191,7 +197,6 @@ const AuthRegister = () => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="demo@company.com"
-                    // inputProps={{}}
                   />
                   {touched.email && errors.email && (
                     <FormHelperText error id="helper-text-email-signup">
@@ -213,10 +218,6 @@ const AuthRegister = () => {
                     name="password"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    // onChange={(e) => {
-                    //   handleChange(e);
-                    //   changePassword(e.target.value);
-                    // }}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
@@ -235,7 +236,6 @@ const AuthRegister = () => {
                       </InputAdornment>
                     }
                     placeholder="******"
-                    // inputProps={{}}
                   />
                   {touched.password && errors.password && (
                     <FormHelperText error id="helper-text-password-signup">
@@ -278,10 +278,6 @@ const AuthRegister = () => {
                     name="confirmpassword"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    // onChange={(e) => {
-                    //   handleChange(e);
-                    //   changePassword(e.target.value);
-                    // }}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
@@ -300,7 +296,6 @@ const AuthRegister = () => {
                       </InputAdornment>
                     }
                     placeholder="******"
-                    // inputProps={{}}
                   />
                   {touched.confirmpassword && errors.confirmpassword && (
                     <FormHelperText
@@ -326,7 +321,6 @@ const AuthRegister = () => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="0300000000"
-                    // inputProps={{}}
                   />
                   {touched.phone_number && errors.phone_number && (
                     <FormHelperText error id="helper-text-phone-signup">
@@ -349,7 +343,6 @@ const AuthRegister = () => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="address"
-                    // inputProps={{}}
                   />
                   {touched.address && errors.address && (
                     <FormHelperText error id="helper-text-lastname-signup">
@@ -395,7 +388,6 @@ const AuthRegister = () => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="NTN"
-                    // inputProps={{}}
                   />
                   {touched.ntn && errors.ntn && (
                     <FormHelperText error id="helper-text-lastname-signup">
@@ -429,10 +421,11 @@ const AuthRegister = () => {
               <Grid item xs={12}>
                 <Typography sx={{ color: "#000" }}>Upload CNIC*</Typography>
               </Grid>
+              <Input id="file-inp" type='file' sx={{display: 'none'}} onChange={handleFrontFileChange}/>
               <Grid item xs={12} md={6}>
+              <label htmlFor="file-inp">
                 <Stack spacing={1}>
                   <Box
-                    onClick={frontSideClick}
                     sx={{
                       bgcolor: "custom.grayLight",
                       height: 150,
@@ -440,21 +433,31 @@ const AuthRegister = () => {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
+                      backgroundImage: `url(${frontFile && URL.createObjectURL(frontFile)})`,
+                      backgroundSize: 'contain',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'center',
                       position: "relative",
                       cursor: "pointer",
                     }}
                   >
+                    {!frontFile && (
                     <Box sx={{ position: "absolute", right: 10, bottom: 2 }}>
                       <FiCamera size={34} color="#E95C20" />
                     </Box>
+                    )}
+                    {!frontFile && (
                     <Typography sx={{ color: "#CAC3C3" }}>front</Typography>
+                    )}
                   </Box>
                 </Stack>
+                </label>
               </Grid>
+              <Input id="file-input" type='file' sx={{display: 'none'}} onChange={handleFileChange}/>
               <Grid item xs={12} md={6}>
+                <label htmlFor="file-input">
                 <Stack spacing={1}>
                   <Box
-                    onClick={backSideClick}
                     sx={{
                       bgcolor: "custom.grayLight",
                       height: 150,
@@ -462,16 +465,25 @@ const AuthRegister = () => {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
+                      backgroundImage: `url(${file && URL.createObjectURL(file)})`,
+                      backgroundSize: 'contain',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'center',
                       position: "relative",
                       cursor: "pointer",
                     }}
                   >
+                    {!file && (
                     <Box sx={{ position: "absolute", right: 10, bottom: 2 }}>
                       <FiCamera size={34} color="#E95C20" />
                     </Box>
+                    )}
+                    {!file && (
                     <Typography sx={{ color: "#CAC3C3" }}>back</Typography>
+                    )}
                   </Box>
                 </Stack>
+                </label>
               </Grid>
               <Grid item xs={12}>
                 <Typography variant="body1">
@@ -510,10 +522,6 @@ const AuthRegister = () => {
           </form>
         )}
       </Formik>
-      <UploadImageModal
-        isOpen={showUploadModal}
-        setShowUploadModal={setShowUploadModal}
-      />
     </>
   );
 };
