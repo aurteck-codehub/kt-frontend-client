@@ -13,7 +13,7 @@ export const appDrawerWidth = 320;
 
 export const NAV_ITEMS = [
   {
-    label: "About Us",
+    label: "Our Values",
     href: "/aboutUs",
   },
   {
