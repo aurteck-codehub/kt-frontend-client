@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "install": "yarn install"
     "lint": "next lint",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json,css}'",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config .prettierrc",
