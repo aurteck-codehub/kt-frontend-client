@@ -1,11 +1,11 @@
 const { Client } = require('pg');
 
 const client = new Client({
-  host: 'karobar-2.cwvnw6sdb3et.eu-west-3.rds.amazonaws.com',
+  host: 'karbar-2.cwvnw6sdb3et.eu-west-3.rds.amazonaws.com',
   port: 5432, // default Postgres port
   user: 'postgres',
   password: 'pakistan',
-  database: 'postgres'
+  database: 'karbar-2'
 });
 
 client.connect();
