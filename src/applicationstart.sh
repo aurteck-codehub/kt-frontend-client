@@ -1,8 +1,9 @@
 #!/bin/bash
 
 cd /var/www/html/production
-sudo npm ci
-sudo npm start
+sudo yarn ci
 sudo yarn add
-sudo npm run dev
-sudo npm install react react-dom
+sudo yarn start
+
+sudo yarn run dev
+sudo yarn install react react-dom
