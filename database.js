@@ -5,7 +5,7 @@ const client = new Client({
   port: 5432, // default Postgres port
   user: 'postgres',
   password: 'pakistan',
-  database: 'karobar-2'
+  database: 'postgres'
 });
 
 client.connect();
