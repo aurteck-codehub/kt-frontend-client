@@ -1,8 +1,7 @@
 #!/bin/bash
 
 cd /var/www/html/production
- yarn ci
- yarn add
- yarn start
-yarn dev 
+ yarn install --frozen-lockfile
+ sudo yarn build
+sudo yarn dev
 sudo yarn install react react-dom
