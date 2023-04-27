@@ -4,6 +4,6 @@ cd /var/www/html/production
  sudo yarn install --frozen-lockfile
  sudo yarn add
  sudo yarn build
- sud0 npm ci
+ sudo npm ci
 sudo yarn dev
 sudo yarn install react react-dom
