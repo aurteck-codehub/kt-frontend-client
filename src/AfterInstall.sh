@@ -2,7 +2,9 @@
 
 cd /var/www/html/production
 export PATH="$PATH:/root/.nvm/versions/node/v18.16.0/bin/"
-sudo chown -R ubuntu:ubuntu /root/.nvm   
+sudo chown -R ubuntu:ubuntu /root/.nvm 
+sudo chown -R ubuntu:ubuntu /usr/local/lib/node_modules
+export PATH="$PATH:$(yarn global bin)
 sudo chmod -R 755 /root/.nvm
 sudo /root/.nvm/versions/node/v18.16.0/bin/npm install husky --save-dev
 sudo /usr/bin/git init
