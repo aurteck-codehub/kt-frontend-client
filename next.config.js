@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    appDir: fasle,
+    appDir: true,
   },
+  disableExperimentalFeaturesWarning: true,
   images: {
     domains: ["via.placeholder.com", "picsum.photos", "kt-storage.s3.amazonaws.com"],
   },
