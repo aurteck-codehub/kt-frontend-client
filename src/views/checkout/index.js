@@ -42,6 +42,12 @@ const CheckOut = () => {
   console.log({id})
 
   const totalPrice = cart?.reduce((sum, item) => sum + parseFloat(item?.Product?.price), 0)
+  const discount = cart?.reduce((acc, { Discount }) => {
+    const price = Discount ? Number(Discount?.discount_amount) : 0;
+    console.log({price})
+    return acc + price;
+  }, 0);
+
   const num = cart?.length;
 
   const handleSubmit = async(e) => {
@@ -73,7 +79,7 @@ const CheckOut = () => {
         <Details shippingAddress={shippingAddress} setShippingAddress={setShippingAddress} contact={contact} setContact={setContact}/>
       </Grid>
       <Grid item xs={12} sm={4} md={3}>
-        <Cart totalPrice={totalPrice} num={num} handleSubmit={handleSubmit}/>
+        <Cart totalPrice={totalPrice} discount={discount} num={num} handleSubmit={handleSubmit}/>
       </Grid>
     </Grid>
     <Box py={10}>

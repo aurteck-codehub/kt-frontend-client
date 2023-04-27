@@ -14,7 +14,6 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { Checkbox } from "@/components";
 import axios from "axios";
 import { API_URL } from "../../configuration";
-import { useEffect, useState } from "react";
 
 const DetailCart = ({cart, setCart, userId}) => {
   let discount = [];
@@ -25,18 +24,6 @@ const DetailCart = ({cart, setCart, userId}) => {
       color: "#9B2915",
     },
   };
-
-  useEffect(() => {
-    console.log('here')
-    cart?.map((item) => {
-      console.log('idddd  ', item?.product_id)
-      axios.get(`${API_URL}/discount/p/${item?.product_id}`)
-      .then((res) => {
-        console.log('data---  ',res.data);
-        discount.push(res?.data?.discount_amount);
-      })
-    })
-  },[cart?.length])
 
   const handleDelete = (e, id) => {
     e.preventDefault();
@@ -86,22 +73,19 @@ const DetailCart = ({cart, setCart, userId}) => {
                   {item?.Product?.name}
                 </Typography>
                 <Typography variant="body2" mt={3}>
-                  {item?.Brand?.name}
+                  {item?.Product?.Brand?.name}
                 </Typography>
               </Grid>
               <Grid item xs={6} sm={3}>
-                {discount?.map((dis) => (
                 <Typography
                   variant="subtitle1"
                   fontWeight={"bold"}
                   color="custom.red"
                 >
-                  {dis}
-                  {/* Rs. 800.00 */}
+                  Rs. {!item?.Discount ? item?.Product?.price : item?.Product?.price - item?.Discount?.discount_amount}{!item?.Discount ? '' : '.00'}
                 </Typography>
-                ))}
-                <Typography fontWeight={"bold"}>Rs. {item?.Product?.price}</Typography>
-                <Typography variant="caption">20%</Typography>
+                <Typography fontWeight={"bold"}><del>Rs. {item?.Product?.price}</del></Typography>
+                <Typography variant="caption">{!item?.Discount ? '0' : ((item?.Discount?.discount_amount / item?.Product?.price) * 100).toFixed(2)}%</Typography>
               </Grid>
               <Grid item xs={6} sm={3}>
                 <Stack

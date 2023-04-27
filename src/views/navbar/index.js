@@ -73,7 +73,9 @@ const Navbar = () => {
 
   const handelLogout = async () => {
     setAnchorElUser(null);
-    await signOut();
+    localStorage.removeItem('user');
+    localStorage.removeItem('profile');
+    localStorage.removeItem('token');
     router.replace("/");
     window.location.reload();
   };

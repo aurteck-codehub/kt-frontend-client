@@ -68,8 +68,9 @@ const AuthLogin = () => {
               setSubmitting(false);
             })
           } catch (err) {
+            console.log({err})
             setStatus({ success: false });
-            setErrors({ submit: err.message });
+            setErrors({ submit: err?.response?.data?.error });
             setSubmitting(false);
           }
         }}
