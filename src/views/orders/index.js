@@ -17,7 +17,6 @@ import MainCard from "@/ui-component/cards/MainCard";
 import Table from "@/components/Table";
 import Iconify from "@/components/iconify";
 import Label from "@/components/label";
-import { gridSpacing, allOrders } from "@/utils";
 import { makeStyles } from "@mui/styles";
 import axios from "axios";
 import { API_URL } from "../../configuration";
