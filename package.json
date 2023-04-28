@@ -45,7 +45,7 @@
     "react-perfect-scrollbar": "^1.5.8",
     "react-redux": "^8.0.5",
     "react-slick": "^0.29.0",
-    "@redux-devtools/extension":"^3.2.5",
+    "@redux-devtools/extension":"^3.1.0",
     "redux-saga": "^1.2.2",
     "simplebar-react": "^3.2.2",
     "slick-carousel": "^1.8.1",
