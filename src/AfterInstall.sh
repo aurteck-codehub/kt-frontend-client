@@ -18,3 +18,11 @@ sudo /usr/local/bin/npm install -g sass
 sudo /usr/local/bin/next build
 sudo /usr/local/bin/npm run dev
 sudo npm install react react-dom
+sudo yarn add
+sudo yarn build
+sudo npm ci
+sudo yarn dev
+sudo npm install -g yarn
+sudo yarn install --frozen-lockfile
+
+
