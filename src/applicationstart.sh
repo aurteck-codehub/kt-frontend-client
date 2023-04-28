@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd /var/www/html/production
-pm2 -f start kt-frontend-client
+pm2  start kt-frontend-client
