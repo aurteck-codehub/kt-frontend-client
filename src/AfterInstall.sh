@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd /var/www/html/production
-export PATH="$PATH:/root/.nvm/versions/node/v18.16.0/bin/"
+export PATH="$PATH:/root/.nvm/versions/node/v19.9.0/bin/"
 sudo chown -R ubuntu:ubuntu /root/.nvm 
 sudo chown -R ubuntu:ubuntu /var/www/html/production/node_modules
 export PATH="$PATH:$(yarn global bin)"
