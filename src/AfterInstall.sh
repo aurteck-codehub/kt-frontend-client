@@ -1,8 +1,8 @@
 #!/bin/bash
 cd /var/www/html/production
 export PATH="$PATH:/var/www/html/production/node_modules/next/"
- sudo npm dev
- sudo  npm build
+ sudo npm run dev
+ sudo  npm run build
  
 
 
