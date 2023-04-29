@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo su
 cd /var/www/html/production
 npm install -g npm@latest
 nvm install node
