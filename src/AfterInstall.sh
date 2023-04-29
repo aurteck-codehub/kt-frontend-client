@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /var/www/html/production
-sudo yarn add sharp
+npm install sharp
 sudo  npm run build
  
 
