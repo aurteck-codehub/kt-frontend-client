@@ -3,7 +3,7 @@ cd /var/www/html/production
 npm install sharp
 export PATH="$PATH:/usr/lib/node_modules/pm2/bin"
 
-pm2 describe "kt-backend-api"
+pm2 describe "kt-frontend-client"
 if [ $? -eq 0 ]
 then
     pm2 restart "kt-frontend-client"
