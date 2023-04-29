@@ -5,5 +5,6 @@ npm install -g npm@latest
 nvm install node
 sudo apt-get install git -y
 git init
+npm install next
 sudo chown -R $(whoami) ~/.npm
 sudo npm install -g sass
