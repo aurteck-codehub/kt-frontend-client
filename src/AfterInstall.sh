@@ -1,6 +1,7 @@
 #!/bin/bash
 cd /var/www/html/production
- sudo npm run start
+ sudo next dev
+ sudo  next build
  
 
 
