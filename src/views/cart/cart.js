@@ -1,12 +1,18 @@
 "use client";
-import Link from "next/link";
 import { Grid, Box, Typography, Stack } from "@mui/material";
-import { Input, Checkbox, PrimaryButton } from "@/components";
+import { Input, PrimaryButton } from "@/components";
 import { useRouter } from "next/navigation";
 
 const Cart = ({cart}) => {
   const router = useRouter();
+  
   const totalPrice = cart?.reduce((sum, item) => sum + parseFloat(item?.Product?.price), 0)
+  const discount = cart?.reduce((acc, { Discount }) => {
+    const price = Discount ? Number(Discount?.discount_amount) : 0;
+    console.log({price})
+    return acc + price;
+  }, 0);
+
   const num = cart?.length;
 
   const handleClick = (e) => {
@@ -61,7 +67,7 @@ const Cart = ({cart}) => {
           >
             <Typography>Discount</Typography>
             <Typography size="sm" textAlign="end">
-              Rs. <span>0.00</span>
+              Rs. <span>{discount}.00</span>
             </Typography>
           </Stack>
           <Stack
@@ -73,7 +79,7 @@ const Cart = ({cart}) => {
           >
             <Typography fontWeight={"bold"}>Total</Typography>
             <Typography size="sm" textAlign="end" fontWeight={"bold"}>
-              Rs. <span>{totalPrice + 119}</span>
+              Rs. <span>{totalPrice - discount + 119}</span>
             </Typography>
           </Stack>
         </Box>

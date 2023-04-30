@@ -26,7 +26,7 @@ import { useRouter } from "next/navigation";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-const ProductDetail = ({id}) => {
+const ProductDetail = ({ id }) => {
   const router = useRouter();
   const [isReadMore, setIsReadMore] = useState(true);
   const [quantity, setQuantity] = useState(1);
@@ -36,61 +36,70 @@ const ProductDetail = ({id}) => {
   const [discount, setDiscount] = useState([]);
   const [diffBrand, setDiffBrand] = useState([]);
   const [sameBrand, setSameBrand] = useState([]);
+  const [profile, setProfile] = useState([]);
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
 
   useEffect(() => {
-    const user = JSON?.parse(localStorage.getItem('user'))
-    axios.get(`${API_URL}/shoppingcart/auth/${user?.id}`)
-    .then((res) => {
-      setShoppingCart(res?.data)
-    })
-    axios.get(`${API_URL}/product/${id}`)
-    .then((res) => {
-      setDetail(res?.data)
-      axios.get(`${API_URL}/product/${res?.data?.Brand?.id}/${res?.data?.Category?.id}`)
-      .then((res) => {
-        setDiffBrand(res?.data?.products);
-      })
-      axios.get(`${API_URL}/product/brand/${res?.data?.Brand?.id}`)
-      .then((res) => {
-        setSameBrand(res?.data?.products);
-      })
-    })
-    axios.get(`${API_URL}/discount/p/${id}`)
-    .then((res) => {
-      setDiscount(res?.data)
-    })
-    axios.get(`${API_URL}/review/product/${id}`)
-    .then((res) => {
+    const user = JSON?.parse(localStorage.getItem("user"));
+    setProfile(user);
+    axios.get(`${API_URL}/shoppingcart/auth/${user?.id}`).then((res) => {
+      setShoppingCart(res?.data);
+    });
+    axios.get(`${API_URL}/product/${id}`).then((res) => {
+      setDetail(res?.data);
+      axios
+        .get(
+          `${API_URL}/product/${res?.data?.Brand?.id}/${res?.data?.Category?.id}`
+        )
+        .then((res) => {
+          setDiffBrand(res?.data?.products);
+        });
+      axios
+        .get(`${API_URL}/product/brand/${res?.data?.Brand?.id}`)
+        .then((res) => {
+          setSameBrand(res?.data?.products);
+        });
+    });
+    axios.get(`${API_URL}/discount/p/${id}`).then((res) => {
+      setDiscount(res?.data);
+    });
+    axios.get(`${API_URL}/review/product/${id}`).then((res) => {
       setReviews(res?.data?.data);
-    })
-  },[])
+    });
+  }, []);
 
   const numReviews = reviews.length;
   let totalRating = 0;
 
-  for (let i = 0; i < numReviews; i++){
+  for (let i = 0; i < numReviews; i++) {
     totalRating += reviews[i].rating;
   }
 
   const averageRating = totalRating / numReviews;
 
-  // const { data } = useSWR(`${API_URL}/product/${id}`, fetcher)
-  // const { data: discount } = useSWR(`${API_URL}/discount/p/${id}`, fetcher)
-  console.log({sameBrand})
+  console.log({ sameBrand });
   const handleClick = (e) => {
-    console.log('clicked')
+    console.log("clicked");
     e.preventDefault();
-    axios.post(`${API_URL}/shoppingcartitem`, {shopping_cart_id: shoppingcart?.id, product_id: data?.id, quantity})
-    .then(() => {
-      router.push('/cart')
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
+    if (!profile) {
+      router.push("/login");
+    } else {
+      axios
+        .post(`${API_URL}/shoppingcartitem`, {
+          shopping_cart_id: shoppingcart?.id,
+          product_id: detail?.id,
+          quantity,
+        })
+        .then(() => {
+          router.push("/cart");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
   return (
     <Container maxWidth="xl">
       <Grid container mt={8} gap={8}>
@@ -179,7 +188,13 @@ const ProductDetail = ({id}) => {
               allowLeadingZeros={false}
             />
             <Typography ml={3} color="black" as="span">
-              -{!discount?.discount_amount ? 0 : ((discount?.discount_amount / detail?.price) * 100).toFixed(2)}%
+              -
+              {!discount?.discount_amount
+                ? 0
+                : ((discount?.discount_amount / detail?.price) * 100).toFixed(
+                    2
+                  )}
+              %
             </Typography>
           </Typography>
           <Stack direction={"row"} alignItems="center" mt={2}>
@@ -219,7 +234,9 @@ const ProductDetail = ({id}) => {
             >
               Buy now
             </Button>
-            <PrimaryButton onClick={(e) => handleClick(e)}>Add to cart</PrimaryButton>
+            <PrimaryButton onClick={(e) => handleClick(e)}>
+              Add to cart
+            </PrimaryButton>
           </Stack>
         </Grid>
       </Grid>
@@ -289,7 +306,7 @@ const ProductDetail = ({id}) => {
           </Typography>
         </Grid>
         <Box mt={5}>
-          <ProductSlider data={diffBrand}/>
+          <ProductSlider data={diffBrand} />
         </Box>
       </Box>
       <Box py={5} mb={10}>
@@ -323,7 +340,7 @@ const ProductDetail = ({id}) => {
           </Typography>
         </Grid>
         <Box mt={5}>
-          <ProductSlider data={sameBrand}/>
+          <ProductSlider data={sameBrand} />
         </Box>
       </Box>
     </Container>
