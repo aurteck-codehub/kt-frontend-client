@@ -4,6 +4,8 @@ import Link from "next/link";
 import {
   Box,
   Button,
+  Dialog,
+  DialogContent,
   FormControl,
   FormHelperText,
   Grid,
@@ -18,24 +20,32 @@ import {
 import * as Yup from "yup";
 import { Formik } from "formik";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import tickcircle from "../../../assets/images/tickcircle.png";
+import smallcircle from "../../../assets/images/smallcircle.png";
 import { strengthColor, strengthIndicator } from "@/utils";
 import { Input, AnimateButton } from "@/components";
 import { FiCamera } from "react-icons/fi";
 import axios from "axios";
 import { API_URL } from "@/configuration";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const AuthRegister = () => {
   const router = useRouter();
   const [area, setArea] = useState([]);
   const [level, setLevel] = useState();
+  const [open, setOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [frontFile, setFrontFile] = useState(null);
   const [file, setFile] = useState(null);
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleFrontFileChange = (e) => {
     setFrontFile(e.target.files[0]);
-  }
+  };
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -55,13 +65,10 @@ const AuthRegister = () => {
 
   useEffect(() => {
     changePassword("");
-    axios.get(`${API_URL}/area`)
-    .then((res) => (
-      setArea(res?.data)
-    ))
-    .catch((err) => (
-      console.log(err)
-    ))
+    axios
+      .get(`${API_URL}/area`)
+      .then((res) => setArea(res?.data))
+      .catch((err) => console.log(err));
   }, []);
 
   return (
@@ -102,24 +109,26 @@ const AuthRegister = () => {
           // nic_number: Yup.number().required("nic number is required"),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-          console.log({values})
+          console.log({ values });
           try {
             const formData = new FormData();
-            for(let value in values) {
-              formData.set(value, values[value])
+            for (let value in values) {
+              formData.set(value, values[value]);
             }
-            formData.append('image1', frontFile)
-            formData.append('image2', file)
-            await
-            axios
+            formData.append("image1", frontFile);
+            formData.append("image2", file);
+            await axios
               .post(`${API_URL}/auth/register`, formData)
               .then((res) => {
-                localStorage.setItem('user', JSON?.stringify(res?.data?.user))
-                localStorage.setItem('profile', JSON?.stringify(res?.data?.profile))
-                localStorage.setItem('token', res?.data?.token)
+                // localStorage.setItem("user", JSON?.stringify(res?.data?.user));
+                // localStorage.setItem(
+                //   "profile",
+                //   JSON?.stringify(res?.data?.profile)
+                // );
+                // localStorage.setItem("token", res?.data?.token);
                 setStatus({ success: false });
                 setSubmitting(false);
-                router.push("/products")
+                setOpen(true)
               });
           } catch (err) {
             console.log("Called");
@@ -352,11 +361,14 @@ const AuthRegister = () => {
                 </Stack>
               </Grid>
               <Grid item xs={12}>
-                  <FormControl fullWidth error={Boolean(touched.area_id && errors.area_id)}>
+                <FormControl
+                  fullWidth
+                  error={Boolean(touched.area_id && errors.area_id)}
+                >
                   <InputLabel htmlFor="add-area_id">Area*</InputLabel>
                   <Select
                     fullWidth
-                    sx={{borderRadius: '15px', backgroundColor: '#D9D9D9'}}
+                    sx={{ borderRadius: "15px", backgroundColor: "#D9D9D9" }}
                     id="add-area_id"
                     value={values.area_id}
                     name="area_id"
@@ -366,13 +378,15 @@ const AuthRegister = () => {
                     onBlur={handleBlur}
                   >
                     {(area || []).map((are) => (
-                      <MenuItem key={are?.id} value={are?.id}>{are.name}</MenuItem>
+                      <MenuItem key={are?.id} value={are?.id}>
+                        {are.name}
+                      </MenuItem>
                     ))}
                   </Select>
                   {touched.area_id && errors.area_id && (
                     <FormHelperText error>{errors.area_id}</FormHelperText>
                   )}
-                  </FormControl>
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
                 <Stack spacing={1}>
@@ -421,68 +435,86 @@ const AuthRegister = () => {
               <Grid item xs={12}>
                 <Typography sx={{ color: "#000" }}>Upload CNIC*</Typography>
               </Grid>
-              <Input id="file-inp" type='file' sx={{display: 'none'}} onChange={handleFrontFileChange}/>
+              <Input
+                id="file-inp"
+                type="file"
+                sx={{ display: "none" }}
+                onChange={handleFrontFileChange}
+              />
               <Grid item xs={12} md={6}>
-              <label htmlFor="file-inp">
-                <Stack spacing={1}>
-                  <Box
-                    sx={{
-                      bgcolor: "custom.grayLight",
-                      height: 150,
-                      borderRadius: 2,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      backgroundImage: `url(${frontFile && URL.createObjectURL(frontFile)})`,
-                      backgroundSize: 'contain',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                      position: "relative",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {!frontFile && (
-                    <Box sx={{ position: "absolute", right: 10, bottom: 2 }}>
-                      <FiCamera size={34} color="#E95C20" />
+                <label htmlFor="file-inp">
+                  <Stack spacing={1}>
+                    <Box
+                      sx={{
+                        bgcolor: "custom.grayLight",
+                        height: 150,
+                        borderRadius: 2,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        backgroundImage: `url(${
+                          frontFile && URL.createObjectURL(frontFile)
+                        })`,
+                        backgroundSize: "contain",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                        position: "relative",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {!frontFile && (
+                        <Box
+                          sx={{ position: "absolute", right: 10, bottom: 2 }}
+                        >
+                          <FiCamera size={34} color="#E95C20" />
+                        </Box>
+                      )}
+                      {!frontFile && (
+                        <Typography sx={{ color: "#CAC3C3" }}>front</Typography>
+                      )}
                     </Box>
-                    )}
-                    {!frontFile && (
-                    <Typography sx={{ color: "#CAC3C3" }}>front</Typography>
-                    )}
-                  </Box>
-                </Stack>
+                  </Stack>
                 </label>
               </Grid>
-              <Input id="file-input" type='file' sx={{display: 'none'}} onChange={handleFileChange}/>
+              <Input
+                id="file-input"
+                type="file"
+                sx={{ display: "none" }}
+                onChange={handleFileChange}
+              />
               <Grid item xs={12} md={6}>
                 <label htmlFor="file-input">
-                <Stack spacing={1}>
-                  <Box
-                    sx={{
-                      bgcolor: "custom.grayLight",
-                      height: 150,
-                      borderRadius: 2,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      backgroundImage: `url(${file && URL.createObjectURL(file)})`,
-                      backgroundSize: 'contain',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                      position: "relative",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {!file && (
-                    <Box sx={{ position: "absolute", right: 10, bottom: 2 }}>
-                      <FiCamera size={34} color="#E95C20" />
+                  <Stack spacing={1}>
+                    <Box
+                      sx={{
+                        bgcolor: "custom.grayLight",
+                        height: 150,
+                        borderRadius: 2,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        backgroundImage: `url(${
+                          file && URL.createObjectURL(file)
+                        })`,
+                        backgroundSize: "contain",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                        position: "relative",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {!file && (
+                        <Box
+                          sx={{ position: "absolute", right: 10, bottom: 2 }}
+                        >
+                          <FiCamera size={34} color="#E95C20" />
+                        </Box>
+                      )}
+                      {!file && (
+                        <Typography sx={{ color: "#CAC3C3" }}>back</Typography>
+                      )}
                     </Box>
-                    )}
-                    {!file && (
-                    <Typography sx={{ color: "#CAC3C3" }}>back</Typography>
-                    )}
-                  </Box>
-                </Stack>
+                  </Stack>
                 </label>
               </Grid>
               <Grid item xs={12}>
@@ -522,6 +554,51 @@ const AuthRegister = () => {
           </form>
         )}
       </Formik>
+      <Dialog open={open} onClose={handleClose} fullWidth>
+        <DialogContent>
+          <Grid container direction={{ xs: "column", md: "row" }} spacing={2}>
+            <Grid item xs>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}
+              >
+                <Box sx={{ width: "100%", height: "420px" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexDirection: "column",
+                      marginTop: "43px",
+                    }}
+                  >
+                    <Image
+                      src={tickcircle}
+                      width={67}
+                      height={67}
+                      alt="circle"
+                    />
+                    <Typography variant="h2" color="custom.orange" mt="63px">
+                      THANK YOU
+                    </Typography>
+                    <Typography variant="h3" mt="21px" textAlign={"center"}>
+                      For Registeration
+                    </Typography>
+                    <Typography variant="h5" mt="21px" fontWeight={400}>
+                      We will inform you after reviewing your application with
+                      in 3 to 4 working days
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

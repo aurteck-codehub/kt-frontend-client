@@ -26,7 +26,6 @@ const DetailCart = () => {
     })
   },[])
 
-  console.log({cart})
   const { data } = useSWR(`${API_URL}/product`, fetcher)
 
   return (
