@@ -46,6 +46,7 @@ const Navbar = () => {
   useEffect(() => {
     const profile = JSON?.parse(localStorage.getItem('profile'))
     setUser(profile)
+    if(profile) {
     axios.get(`${API_URL}/shoppingcart/auth/${profile?.user_id}`)
     .then((res) => {
       axios.get(`${API_URL}/shoppingcartitem/cart/${res?.data?.id}`)
@@ -53,6 +54,7 @@ const Navbar = () => {
         setCart(res?.data)
       })
     })
+  }
   },[])
 
   const handleOpenNavMenu = (event) => {
@@ -168,11 +170,53 @@ const Navbar = () => {
                     </Tooltip>
                   </>
                 ) : (
-                  <NextLink href="/login">
-                    <IconButton size="medium">
-                      <PersonOutlineIcon sx={{ color: "custom.green" }} />
-                    </IconButton>
-                  </NextLink>
+                  // <NextLink href="/login">
+                  //   <IconButton size="medium">
+                  //     <PersonOutlineIcon sx={{ color: "custom.green" }} />
+                  //   </IconButton>
+                  // </NextLink>
+                  <Box sx={{display: 'flex'}}>
+                  <Box sx={{ px: 0, paddingRight: '15px' }}>
+                      <NextLink
+                        href="/login"
+                        style={{
+                          textDecoration: "none",
+                          color: "#199088",
+                        }}
+                        className={styles.navbar}
+                      >
+                        <Typography
+                          underline="hover"
+                          variant="h4"
+                          color={"primary"}
+                          fontWeight={400}
+                          className={inter.className}
+                        >
+                          Login
+                        </Typography>
+                      </NextLink>
+                    </Box>
+                    <Box sx={{ px: 0, paddingRight: '0px' }}>
+                      <NextLink
+                        href="/register"
+                        style={{
+                          textDecoration: "none",
+                          color: "#199088",
+                        }}
+                        className={styles.navbar}
+                      >
+                        <Typography
+                          underline="hover"
+                          variant="h4"
+                          color={"primary"}
+                          fontWeight={400}
+                          className={inter.className}
+                        >
+                          Register
+                        </Typography>
+                      </NextLink>
+                    </Box>
+                    </Box>
                 )}
                 <Menu
                   sx={{ mt: "45px" }}

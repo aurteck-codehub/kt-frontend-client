@@ -13,10 +13,26 @@ import MainCard from "@/ui-component/cards/MainCard";
 import { useSession } from "next-auth/react";
 import EditIcon from "@mui/icons-material/Edit";
 import { gridSpacing } from "@/utils";
+import { useEffect, useState } from "react";
+
 const DashBoard = () => {
   const { data } = useSession();
+  const [user, setUser] = useState([]);
+  const [profile, setProfile] = useState([]);
+
+  useEffect(() => {
+    const authUser = JSON?.parse(localStorage.getItem("user"));
+    setUser(authUser);
+    const userProfile = JSON.parse(localStorage.getItem("profile"));
+    setProfile(userProfile)
+  },[])
   return (
-    <MainCard title={`Hi, ${data?.user?.name ?? ""}`} darkTitle>
+    <MainCard title={`Hi, ${profile?.name ?? ""}`} darkTitle>
+      {user?.status === 'inactive' ? 
+      <Typography>
+        Your Application is under review, we will inform you after reviewing your application with in 3 to 4 working days. 
+      </Typography> 
+      :
       <Grid container spacing={gridSpacing}>
         <Grid item xs={12} sm={6} md={4}>
           <Card>
@@ -31,9 +47,9 @@ const DashBoard = () => {
             />
             <Grid container direction={"column"} p={3}>
               <Stack spacing={1}>
-                <Typography>{data?.user?.name ?? ""}</Typography>
-                <Typography>+92 321 765 4321</Typography>
-                <Typography>useremail@example.com</Typography>
+                <Typography>{profile?.name ?? ""}</Typography>
+                <Typography>{profile?.phone_number}</Typography>
+                <Typography>{user?.email}</Typography>
               </Stack>
             </Grid>
           </Card>
@@ -62,25 +78,26 @@ const DashBoard = () => {
                   </Typography>
                   <Typography>{data?.user?.name ?? ""}</Typography>
                   <Typography>
-                    Shop 123, area name, Lahore, Pakistan{" "}
+                    {profile?.address}{" "}
                   </Typography>
-                  <Typography>+92 321 765 4321</Typography>
+                  <Typography>{profile?.phone_number}</Typography>
                 </Stack>
                 <Stack spacing={1}>
                   <Typography variant="h4" color="textSecondary">
                     Default Billing Address
                   </Typography>
-                  <Typography>{data?.user?.name ?? ""}</Typography>
+                  <Typography>{profile?.name ?? ""}</Typography>
                   <Typography>
-                    Shop 123, area name, Lahore, Pakistan{" "}
+                    {profile?.address}{" "}
                   </Typography>
-                  <Typography>+92 321 765 4321</Typography>
+                  <Typography>{profile?.phone_number}</Typography>
                 </Stack>
               </Stack>
             </Grid>
           </Card>
         </Grid>
       </Grid>
+      }
     </MainCard>
   );
 };

@@ -63,7 +63,11 @@ const AuthLogin = () => {
               localStorage.setItem('user', JSON?.stringify(res?.data?.user))
               localStorage.setItem('profile', JSON?.stringify(res?.data?.userProfile))
               localStorage.setItem('token', res?.data?.token)
-              router.push('/products')
+              if(res?.data?.user?.status === 'active') {
+                router.push('/products')
+              } else {
+                router.push('/dashboard')
+              }
               setStatus({ success: false });
               setSubmitting(false);
             })

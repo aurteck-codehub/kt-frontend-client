@@ -44,9 +44,11 @@ const ProductDetail = ({ id }) => {
   useEffect(() => {
     const user = JSON?.parse(localStorage.getItem("user"));
     setProfile(user);
-    axios.get(`${API_URL}/shoppingcart/auth/${user?.id}`).then((res) => {
-      setShoppingCart(res?.data);
-    });
+    if(user) {
+      axios.get(`${API_URL}/shoppingcart/auth/${user?.id}`).then((res) => {
+        setShoppingCart(res?.data);
+      });
+    }
     axios.get(`${API_URL}/product/${id}`).then((res) => {
       setDetail(res?.data);
       axios
