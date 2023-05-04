@@ -19,6 +19,7 @@
     "@mui/icons-material": "^5.11.11",
     "@mui/lab": "^5.0.0-alpha.124",
     "@mui/material": "^5.11.11",
+    "@mui/styles": "^5.12.3",
     "@redux-devtools/extension": "^3.2.5",
     "@tabler/icons-react": "^2.11.0",
     "apexcharts": "^3.37.1",
