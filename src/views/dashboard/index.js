@@ -76,7 +76,7 @@ const DashBoard = () => {
                   <Typography variant="h4" color="textSecondary">
                     Default shipping Address
                   </Typography>
-                  <Typography>{data?.user?.name ?? ""}</Typography>
+                  <Typography>{profile?.name ?? ""}</Typography>
                   <Typography>
                     {profile?.address}{" "}
                   </Typography>

@@ -219,7 +219,7 @@ const ProductDetail = ({ id }) => {
               <RemoveIcon />
             </IconButton>
             <Typography sx={{ color: "custom.gray" }} fontWeight="bold" ml={3}>
-              {productDetailData.totalItem} items left
+              {parseFloat(detail?.quantity).toFixed()} items left
             </Typography>
           </Stack>
           <Stack direction={"row"} mt={5}>
@@ -261,7 +261,7 @@ const ProductDetail = ({ id }) => {
         <Typography variant="h4" fontWeight={"bold"} mb={3}>
           Rating & reviews
         </Typography>
-        <RatingAndSlider rating={averageRating} totalReviews={numReviews} />
+        <RatingAndSlider rating={!averageRating ? 0 : averageRating} totalReviews={numReviews} />
         {reviews?.map((item, index) => (
           <ClientReviews
             key={index}

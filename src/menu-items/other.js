@@ -8,7 +8,7 @@ const other = {
       id: "setting",
       title: "Settings",
       type: "item",
-      url: "/setting",
+      url: "/dashboard/setting",
       icon: icons.IconSettings,
       breadcrumbs: false,
     },
