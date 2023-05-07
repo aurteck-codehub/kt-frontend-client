@@ -192,18 +192,18 @@ const Categories = ({gri}) => {
         Categories
       </Typography>
       <Box px={2}>
-        {data?.categories.map((category) => (
+        {data?.categories?.map((category) => (
           <Accordion
-            key={category.id}
-            expanded={expanded === category.id}
-            onChange={handleAccordionChange(category.id)}
+            key={category?.id}
+            expanded={expanded === category?.id}
+            onChange={handleAccordionChange(category?.id)}
             // key={category.id}
             // expanded={expanded}
             // onChange={handleAccordionChange}
           >
             <AccordionSummary
                   expandIcon={
-                    expanded === category.id ? (
+                    expanded === category?.id ? (
                       <ExpandLess />
                     ) : (
                       <ExpandMore color="primary" />
@@ -218,11 +218,11 @@ const Categories = ({gri}) => {
                 // style={{ textDecoration: "none" }}
               >
                 <Typography color="primary" fontWeight={"bold"}>
-                  {category.title}
+                  {category?.title}
                 </Typography>
               </div>
             </AccordionSummary>
-            {category.children?.map((item) => (
+            {category?.children?.map((item) => (
               <AccordionDetails key={item?.id}>
                 {item.subitems != null ? (
                   <Box>
@@ -262,7 +262,7 @@ const Categories = ({gri}) => {
                         style={{ textDecoration: "none" }}
                       >
                         <Typography color="primary" variant="subtitle1">
-                          {item.name}
+                          {item?.name}
                         </Typography>
                       </NextLink>
                     </ListItem>
