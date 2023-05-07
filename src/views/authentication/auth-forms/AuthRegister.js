@@ -23,7 +23,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import tickcircle from "../../../assets/images/tickcircle.png";
 import smallcircle from "../../../assets/images/smallcircle.png";
 import { strengthColor, strengthIndicator } from "@/utils";
-import { Input, AnimateButton } from "@/components";
+import { Input } from "@/components";
 import { FiCamera } from "react-icons/fi";
 import axios from "axios";
 import { API_URL } from "@/configuration";
@@ -531,7 +531,7 @@ const AuthRegister = () => {
                 </Grid>
               )}
               <Grid item xs={12}>
-                <AnimateButton>
+                {/* <AnimateButton> */}
                   <Button
                     disableElevation
                     disabled={isSubmitting}
@@ -548,7 +548,7 @@ const AuthRegister = () => {
                   >
                     Create Account
                   </Button>
-                </AnimateButton>
+                {/* </AnimateButton> */}
               </Grid>
             </Grid>
           </form>

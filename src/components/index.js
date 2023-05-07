@@ -1,4 +1,4 @@
-export { default as AnimateButton } from "./AnimateButton";
+// export { default as AnimateButton } from "./AnimateButton";
 export { default as Dialog } from "./Dialog";
 export { default as Input } from "./InputField";
 export { default as MainCard } from "./MainCard";

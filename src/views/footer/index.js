@@ -18,7 +18,7 @@ import LogoIcon from "@/assets/icons/LogoWhite.svg";
 import { inter } from "@/assets/fonts";
 import * as Yup from "yup";
 import { Formik } from "formik";
-import AnimateButton from "@/components/AnimateButton";
+// import AnimateButton from "@/components/AnimateButton";
 import { NAV_ITEMS, OTHER_LINK, hideLayoutRoutes } from "@/utils";
 import { CiFacebook, CiYoutube, CiInstagram, CiPhone } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
@@ -304,7 +304,7 @@ const Footer = () => {
                           container
                           justifyContent={"flex-end"}
                         >
-                          <AnimateButton>
+                          {/* <AnimateButton> */}
                             <Button
                               disableElevation
                               disabled={isSubmitting}
@@ -321,7 +321,7 @@ const Footer = () => {
                             >
                               Send
                             </Button>
-                          </AnimateButton>
+                          {/* </AnimateButton> */}
                         </Grid>
                       </Grid>
                     </form>

@@ -16,7 +16,7 @@ import {
 import * as Yup from "yup";
 import { Formik } from "formik";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Input, AnimateButton } from "@/components";
+import { Input } from "@/components";
 import axios from "axios";
 import { API_URL } from "../../../configuration";
 
@@ -195,7 +195,7 @@ const AuthLogin = () => {
                 </Grid>
               )}
               <Grid item xs={12}>
-                <AnimateButton>
+                {/* <AnimateButton> */}
                   <Button
                     disableElevation
                     disabled={isSubmitting}
@@ -212,7 +212,7 @@ const AuthLogin = () => {
                   >
                     Login
                   </Button>
-                </AnimateButton>
+                {/* </AnimateButton> */}
               </Grid>
             </Grid>
           </form>
