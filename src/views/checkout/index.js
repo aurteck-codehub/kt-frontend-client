@@ -49,6 +49,7 @@ const CheckOut = () => {
   }, 0);
 
   const num = cart?.length;
+  let currentDate = new Date();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -65,7 +66,7 @@ const CheckOut = () => {
         })
         await axios.delete(`${API_URL}/shoppingcartitem/${item?.id}`)
       }
-      await axios.post(`${API_URL}/invoice`, {...invoice, order_id: orderRes?.data?.id, amount: totalPrice+119, auth_user_id: id})
+      await axios.post(`${API_URL}/invoice`, {...invoice, order_id: orderRes?.data?.id, amount: totalPrice+119, auth_user_id: id, status: 'outstanding', due_date: currentDate})
       router.push('/conformation')
     } catch (error) {
       console.log(error)
