@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import {
   Button,
   Checkbox,
@@ -21,7 +21,7 @@ import axios from "axios";
 import { API_URL } from "../../../configuration";
 
 const AuthLogin = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const [checked, setChecked] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -64,9 +64,11 @@ const AuthLogin = () => {
               localStorage.setItem('profile', JSON?.stringify(res?.data?.userProfile))
               localStorage.setItem('token', res?.data?.token)
               if(res?.data?.user?.status === 'active') {
-                router.push('/products')
+                // router.push('/products')
+                window?.location?.href = '/products'
               } else {
-                router.push('/dashboard')
+                // router.push('/dashboard')
+                window?.location?.href = '/dashboard'
               }
               setStatus({ success: false });
               setSubmitting(false);
