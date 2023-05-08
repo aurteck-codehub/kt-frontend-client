@@ -65,10 +65,10 @@ const AuthLogin = () => {
               localStorage.setItem('token', res?.data?.token)
               if(res?.data?.user?.status === 'active') {
                 // router.push('/products')
-                window?.location?.href = '/products'
+                window.location.href = '/products'
               } else {
                 // router.push('/dashboard')
-                window?.location?.href = '/dashboard'
+                window.location.href = '/dashboard'
               }
               setStatus({ success: false });
               setSubmitting(false);
