@@ -16,12 +16,12 @@ const Category = ({ index, item, link }) => {
             spacing={1}
             sx={{ overflow: "hidden" }}
           >
-            <Image
+            {/* <Image
               src={"https://via.placeholder.com/300.png"}
               alt="product-image"
               width={250}
               height={200}
-            />
+            /> */}
             <Typography color="black" variant="h3" textTransform="uppercase">
               {item?.title}
             </Typography>

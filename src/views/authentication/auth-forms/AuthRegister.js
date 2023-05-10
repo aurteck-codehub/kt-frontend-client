@@ -103,10 +103,10 @@ const AuthRegister = () => {
           //   ),
           // }),
           address: Yup.string().required("Address is required"),
-          phone_number: Yup.number().required("Phone number is required"),
+          phone_number: Yup.string().max(11).required("Phone number is required"),
           area_id: Yup.number().required("Area is required"),
           ntn: Yup.number().required("ntn number is required"),
-          nic_number: Yup.number().required("nic number is required"),
+          nic_number: Yup.string().max(13).required("nic number is required"),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           console.log({ values });
@@ -117,13 +117,13 @@ const AuthRegister = () => {
             }
             formData.append("image1", frontFile);
             formData.append("image2", file);
-            // await axios
-            //   .post(`${API_URL}/auth/register`, formData)
-            //   .then((res) => {
-            //     setStatus({ success: false });
-            //     setSubmitting(false);
-            //     setOpen(true)
-            //   });
+            await axios
+              .post(`${API_URL}/auth/register`, formData)
+              .then((res) => {
+                setStatus({ success: false });
+                setSubmitting(false);
+                setOpen(true)
+              });
             console.log({values})
           } catch (err) {
             console.log("Called");
@@ -247,7 +247,7 @@ const AuthRegister = () => {
                     </FormHelperText>
                   )}
                 </Stack>
-                <FormControl fullWidth sx={{ mt: 2 }}>
+                {/* <FormControl fullWidth sx={{ mt: 2 }}>
                   <Grid container spacing={2} alignItems="center">
                     <Grid item>
                       <Box
@@ -265,7 +265,7 @@ const AuthRegister = () => {
                       </Typography>
                     </Grid>
                   </Grid>
-                </FormControl>
+                </FormControl> */}
               </Grid>
               <Grid item xs={12}>
                 <Stack spacing={1}>
@@ -356,6 +356,9 @@ const AuthRegister = () => {
                 </Stack>
               </Grid>
               <Grid item xs={12}>
+              <Typography sx={{}}>Area*</Typography>
+              </Grid>
+              <Grid item xs={12} sx={{paddingTop: '10px !important'}}>
                 <FormControl
                   fullWidth
                   error={Boolean(touched.area_id && errors.area_id)}
