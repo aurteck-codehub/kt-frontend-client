@@ -360,9 +360,9 @@ const AuthRegister = () => {
                   )}
                 </Stack>
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <Typography>Area*</Typography>
-              </Grid>
+              </Grid> */}
               <Grid item xs={12} sx={{paddingTop: '10px !important'}}>
                 <FormControl
                   fullWidth
