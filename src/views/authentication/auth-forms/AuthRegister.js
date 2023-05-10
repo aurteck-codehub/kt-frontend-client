@@ -252,7 +252,7 @@ const AuthRegister = () => {
                     </FormHelperText>
                   )}
                 </Stack>
-                {/* <FormControl fullWidth sx={{ mt: 2 }}>
+                <FormControl fullWidth sx={{ mt: 2 }}>
                   <Grid container spacing={2} alignItems="center">
                     <Grid item>
                       <Box
@@ -270,7 +270,7 @@ const AuthRegister = () => {
                       </Typography>
                     </Grid>
                   </Grid>
-                </FormControl> */}
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
                 <Stack spacing={1}>
