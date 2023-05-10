@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { Stack, Typography, Card, CardContent, useTheme } from "@mui/material";
 
@@ -26,7 +25,6 @@ const Category = ({ index, item, link }) => {
               {item?.title}
             </Typography>
             <Typography variant="body2" color="black">
-              {/* Milk, cream, powdered milk, cheese, Tea Whitener */}
               {item?.children?.map((sub) => (
                 <>{sub?.name} , </>
               ))}
