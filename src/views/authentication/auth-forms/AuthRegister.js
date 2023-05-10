@@ -117,14 +117,19 @@ const AuthRegister = () => {
             }
             formData.append("image1", frontFile);
             formData.append("image2", file);
-            // await axios
-            //   .post(`${API_URL}/auth/register`, formData)
-            //   .then((res) => {
-            //     setStatus({ success: false });
-            //     setSubmitting(false);
-            //     setOpen(true)
-            //   });
-            console.log({values})
+            await axios
+              .post(`${API_URL}/auth/register`, formData)
+              .then((res) => {
+                // localStorage.setItem("user", JSON?.stringify(res?.data?.user));
+                // localStorage.setItem(
+                //   "profile",
+                //   JSON?.stringify(res?.data?.profile)
+                // );
+                // localStorage.setItem("token", res?.data?.token);
+                setStatus({ success: false });
+                setSubmitting(false);
+                setOpen(true)
+              });
           } catch (err) {
             console.log("Called");
             setStatus({ success: false });
@@ -247,7 +252,7 @@ const AuthRegister = () => {
                     </FormHelperText>
                   )}
                 </Stack>
-                <FormControl fullWidth sx={{ mt: 2 }}>
+                {/* <FormControl fullWidth sx={{ mt: 2 }}>
                   <Grid container spacing={2} alignItems="center">
                     <Grid item>
                       <Box
@@ -265,7 +270,7 @@ const AuthRegister = () => {
                       </Typography>
                     </Grid>
                   </Grid>
-                </FormControl>
+                </FormControl> */}
               </Grid>
               <Grid item xs={12}>
                 <Stack spacing={1}>
@@ -356,11 +361,14 @@ const AuthRegister = () => {
                 </Stack>
               </Grid>
               <Grid item xs={12}>
+                <Typography>Area*</Typography>
+              </Grid>
+              <Grid item xs={12} sx={{paddingTop: '10px !important'}}>
                 <FormControl
                   fullWidth
                   error={Boolean(touched.area_id && errors.area_id)}
                 >
-                  <InputLabel htmlFor="add-area_id">Area*</InputLabel>
+                  {/* <InputLabel htmlFor="add-area_id">Area*</InputLabel> */}
                   <Select
                     fullWidth
                     sx={{ borderRadius: "15px", backgroundColor: "#D9D9D9" }}
