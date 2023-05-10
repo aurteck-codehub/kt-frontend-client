@@ -13,12 +13,10 @@ import {
   ClickAwayListener,
   Divider,
   Grid,
-  InputAdornment,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  OutlinedInput,
   Paper,
   Popper,
   Stack,
@@ -30,11 +28,9 @@ import MainCard from "@/ui-component/cards/MainCard";
 import Transitions from "@/ui-component/extended/Transitions";
 import {
   IconLogout,
-  IconSearch,
   IconSettings,
-  IconUser,
 } from "@tabler/icons-react";
-import User1 from "@/assets/images/users/user-round.svg";
+// import User1 from "@/assets/images/users/user-round.svg";
 
 const ProfileSection = () => {
   const { data } = useSession();
@@ -43,16 +39,18 @@ const ProfileSection = () => {
   const router = useRouter();
 
   const [sdm, setSdm] = useState(true);
-  const [value, setValue] = useState("");
   const [notification, setNotification] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
 
   const anchorRef = useRef(null);
   const handleLogout = async () => {
-    await signOut();
-    router.replace("/");
-    window.location.reload();
+    // await signOut();
+    localStorage.removeItem('user');
+    localStorage.removeItem('profile');
+    localStorage.removeItem('token');
+    // router.push("/");
+    window.location.href = "/";
   };
 
   const handleClose = (event) => {

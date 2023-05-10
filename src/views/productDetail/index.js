@@ -95,7 +95,8 @@ const ProductDetail = ({ id }) => {
           quantity,
         })
         .then(() => {
-          router.push("/cart");
+          // router.push("/cart");
+          window.location.href = "/cart";
         })
         .catch((err) => {
           console.log(err);
@@ -204,7 +205,11 @@ const ProductDetail = ({ id }) => {
             <IconButton
               sx={{ bgcolor: "#b4b4b4", borderRadius: 1 }}
               size="small"
-              onClick={() => setQuantity((quantity) => quantity + 1)}
+              onClick={() => {
+                if (quantity + 1 <= detail?.quantity) {
+                  setQuantity((quantity) => quantity + 1)
+                }
+              }}
             >
               <AddIcon />
             </IconButton>
@@ -214,7 +219,11 @@ const ProductDetail = ({ id }) => {
             <IconButton
               sx={{ bgcolor: "#b4b4b4", borderRadius: 1 }}
               size="small"
-              onClick={() => setQuantity((quantity) => quantity - 1)}
+              onClick={() => {
+                if (quantity - 1 >= 1) {
+                  setQuantity((quantity) => quantity - 1)
+                }
+              }}
             >
               <RemoveIcon />
             </IconButton>

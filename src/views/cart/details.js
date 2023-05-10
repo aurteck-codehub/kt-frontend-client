@@ -33,6 +33,7 @@ const DetailCart = ({cart, setCart, userId}) => {
       axios.get(`${API_URL}/shoppingcartitem/cart/${userId}`)
       .then((res) => {
         setCart(res?.data)
+        window.location.reload();
       })
     })
   }

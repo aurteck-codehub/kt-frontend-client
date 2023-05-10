@@ -78,8 +78,8 @@ const Navbar = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('profile');
     localStorage.removeItem('token');
-    router.replace("/");
-    window.location.reload();
+    // router.replace("/");
+    window.location.href = '/';
   };
 
   return (

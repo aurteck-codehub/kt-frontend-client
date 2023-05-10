@@ -38,11 +38,11 @@ const DashBoard = () => {
           <Card>
             <CardHeader
               disableTypography
-              action={
-                <IconButton aria-label="settings">
-                  <EditIcon />
-                </IconButton>
-              }
+              // action={
+              //   <IconButton aria-label="settings">
+              //     <EditIcon />
+              //   </IconButton>
+              // }
               title={<Typography variant="h3">Personal Profile</Typography>}
             />
             <Grid container direction={"column"} p={3}>
@@ -58,11 +58,11 @@ const DashBoard = () => {
           <Card>
             <CardHeader
               disableTypography
-              action={
-                <IconButton aria-label="settings">
-                  <EditIcon />
-                </IconButton>
-              }
+              // action={
+              //   <IconButton aria-label="settings">
+              //     <EditIcon />
+              //   </IconButton>
+              // }
               title={<Typography variant="h3">Address Book</Typography>}
             />
             <Grid container direction={"column"} p={2}>

@@ -11,6 +11,7 @@ import {
   Divider,
   Box,
   TextField,
+  Button,
 } from "@mui/material";
 import MainCard from "@/ui-component/cards/MainCard";
 import { useEffect, useState } from "react";
@@ -18,66 +19,123 @@ import EditIcon from "@mui/icons-material/Edit";
 import { gridSpacing } from "@/utils";
 import axios from "axios";
 import { API_URL } from "@/configuration";
+import { Formik, Form, Field } from "formik";
 import PrimaryButton from "../../components/PrimaryButton";
 
 const SettingsView = () => {
   const [user, setUser] = useState([]);
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const authUser = JSON?.parse(localStorage.getItem("user"));
     setUser(authUser);
-  },[])
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    if(password === confirmPassword) {
-      axios.put(`${API_URL}/auth/resetpassword/${user?.id}`, {password})
-      .then((res) => {
-        setMessage('Password reset successfully')
-        setOpen(true)
-        setPassword('')
-        setConfirmPassword('');
-      }).catch(() => {
-        setMessage('Passwords does not match')
-        setOpen(true)
-      })
-    }
-  }
   return (
     <>
-    <MainCard title={`My Settings`} darkTitle>
-      <Grid container spacing={gridSpacing}>
-        <Grid item xs={12} sm={6} md={6}>
-          <Card>
-            <CardHeader
-              disableTypography
-              action={
-                <IconButton aria-label="settings">
-                  <EditIcon />
-                </IconButton>
-              }
-              title={<Typography variant="h3">Change Password</Typography>}
-            />
-              <div style={{display: 'flex', flexDirection: 'column'}}>
-              <TextField label="New Password" value={password} onChange={(e) => setPassword(e.target.value)} size="small" sx={{width: '90%', borderRadius: '10px', margin: '15px'}}/>
-              <TextField label="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} size="small" sx={{width: '90%', borderRadius: '10px', margin: '15px'}}/>
-              <div onClick={handleClick} style={{display: 'flex', justifyContent: 'flex-end', marginRight: '7%', marginBottom: '10px'}}>
-                <PrimaryButton sx={{width: '20%'}}>Save</PrimaryButton>
-              </div>
-              </div>
-          </Card>
+      <MainCard title={`My Settings`} darkTitle>
+        <Grid container spacing={gridSpacing}>
+          <Grid item xs={12} sm={6} md={6}>
+            <Card>
+              <CardHeader
+                disableTypography
+                title={<Typography variant="h3">Change Password</Typography>}
+              />
+              <Formik
+                initialValues={{
+                  password: "",
+                  confirmPassword: "",
+                }}
+                validate={(values) => {
+                  const errors = {};
+                  if (!values.password) {
+                    errors.password = "Required";
+                  }
+                  if (!values.confirmPassword) {
+                    errors.confirmPassword = "Required";
+                  } else if (values.confirmPassword !== values.password) {
+                    errors.confirmPassword = "Passwords do not match";
+                  }
+                  return errors;
+                }}
+                onSubmit={(values) => {
+                  console.log(values);
+                  axios
+                    .put(`${API_URL}/auth/resetpassword/${user?.id}`, values)
+                    .then((res) => {
+                      setMessage("Password reset successfully");
+                      setOpen(true);
+                    });
+                }}
+              >
+                {({ errors, touched }) => (
+                  <Form>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <Field
+                        name="password"
+                        label="New Password"
+                        required
+                        as={TextField}
+                        size="small"
+                        sx={{
+                          width: "90%",
+                          borderRadius: "10px",
+                          margin: "15px",
+                        }}
+                      />
+                      {errors.password && touched.password && (
+                        <div>{errors.password}</div>
+                      )}
+                      <Field
+                        name="confirmPassword"
+                        label="Confirm Password"
+                        required
+                        as={TextField}
+                        size="small"
+                        sx={{
+                          width: "90%",
+                          borderRadius: "10px",
+                          margin: "15px",
+                        }}
+                      />
+                      {errors.confirmPassword && touched.confirmPassword && (
+                        <div>{errors.confirmPassword}</div>
+                      )}
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          marginRight: "7%",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        <Button
+                          variant="contained"
+                          sx={{
+                            bgcolor: "custom.green",
+                            fontWeight: "bold",
+                            textTransform: "capitalize",
+                            boxShadow: "none",
+                          }}
+                          type="submit"
+                        >
+                          Save
+                        </Button>
+                      </div>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-    </MainCard>
-    <Dialog open={open} onClose={handleClose} fullWidth>
+      </MainCard>
+      <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogContent>
           <Grid container direction={{ xs: "column", md: "row" }} spacing={2}>
             <Grid item xs>
@@ -122,6 +180,6 @@ const SettingsView = () => {
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 };
 export default SettingsView;

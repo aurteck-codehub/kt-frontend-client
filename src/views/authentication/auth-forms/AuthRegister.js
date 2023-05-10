@@ -88,12 +88,12 @@ const AuthRegister = () => {
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          // name: Yup.string().max(255).required("Name is required"),
-          // store_name: Yup.string().required("store name is required"),
-          // email: Yup.string()
-          //   .email("Must be a valid email")
-          //   .max(255)
-          //   .required("Email is required"),
+          name: Yup.string().max(255).required("Name is required"),
+          store_name: Yup.string().required("store name is required"),
+          email: Yup.string()
+            .email("Must be a valid email")
+            .max(255)
+            .required("Email is required"),
           // password: Yup.string().max(255).required("Password is required"),
           // confirmpassword: Yup.string().when("password", {
           //   is: (val) => (val && val.length > 0 ? true : false),
@@ -102,11 +102,11 @@ const AuthRegister = () => {
           //     "Both password need to be the same"
           //   ),
           // }),
-          // address: Yup.string().required("Address is required"),
-          // phone_number: Yup.number().required("Phone number is required"),
-          // area_id: Yup.number().required("Area is required"),
-          // ntn: Yup.number().required("ntn number is required"),
-          // nic_number: Yup.number().required("nic number is required"),
+          address: Yup.string().required("Address is required"),
+          phone_number: Yup.number().required("Phone number is required"),
+          area_id: Yup.number().required("Area is required"),
+          ntn: Yup.number().required("ntn number is required"),
+          nic_number: Yup.number().required("nic number is required"),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           console.log({ values });
@@ -117,19 +117,14 @@ const AuthRegister = () => {
             }
             formData.append("image1", frontFile);
             formData.append("image2", file);
-            await axios
-              .post(`${API_URL}/auth/register`, formData)
-              .then((res) => {
-                // localStorage.setItem("user", JSON?.stringify(res?.data?.user));
-                // localStorage.setItem(
-                //   "profile",
-                //   JSON?.stringify(res?.data?.profile)
-                // );
-                // localStorage.setItem("token", res?.data?.token);
-                setStatus({ success: false });
-                setSubmitting(false);
-                setOpen(true)
-              });
+            // await axios
+            //   .post(`${API_URL}/auth/register`, formData)
+            //   .then((res) => {
+            //     setStatus({ success: false });
+            //     setSubmitting(false);
+            //     setOpen(true)
+            //   });
+            console.log({values})
           } catch (err) {
             console.log("Called");
             setStatus({ success: false });

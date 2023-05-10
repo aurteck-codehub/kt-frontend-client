@@ -43,11 +43,11 @@ const OutletsView = () => {
           <Card>
             <CardHeader
               disableTypography
-              action={
-                <IconButton aria-label="settings">
-                  <EditIcon />
-                </IconButton>
-              }
+              // action={
+              //   <IconButton aria-label="settings">
+              //     <EditIcon />
+              //   </IconButton>
+              // }
               title={<Typography variant="h3">{outlet?.name}</Typography>}
             />
             <Grid container direction={"column"} p={3}>
@@ -63,11 +63,11 @@ const OutletsView = () => {
           <Card>
             <CardHeader
               disableTypography
-              action={
-                <IconButton aria-label="settings">
-                  <EditIcon />
-                </IconButton>
-              }
+              // action={
+              //   <IconButton aria-label="settings">
+              //     <EditIcon />
+              //   </IconButton>
+              // }
               title={<Typography variant="h3">Address Book</Typography>}
             />
             <Grid container direction={"column"} p={2}>

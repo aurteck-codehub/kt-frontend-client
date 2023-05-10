@@ -22,30 +22,30 @@ export const NAV_ITEMS = [
   },
   {
     label: "Our Story",
-    href: "/our-story",
+    href: "/",
   },
   {
     label: "Contact Us",
-    href: "/contact",
+    href: "/",
   },
 ];
 
 export const OTHER_LINK = [
   {
     label: "Terms & Conditions",
-    href: "/terms",
+    href: "/",
   },
   {
     label: "Privacy Policy",
-    href: "/privacy",
+    href: "/",
   },
   {
     label: "Returns",
-    href: "/returns",
+    href: "/",
   },
   {
     label: "FAQ's",
-    href: "/faq",
+    href: "/",
   },
 ];
 
