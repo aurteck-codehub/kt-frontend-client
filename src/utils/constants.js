@@ -20,10 +20,10 @@ export const NAV_ITEMS = [
     label: "Buy On KT",
     href: "/products",
   },
-  {
-    label: "Our Story",
-    href: "/",
-  },
+  // {
+  //   label: "Our Story",
+  //   href: "/",
+  // },
   {
     label: "Contact Us",
     href: "/",
