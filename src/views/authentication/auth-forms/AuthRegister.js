@@ -88,12 +88,12 @@ const AuthRegister = () => {
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          // name: Yup.string().max(255).required("Name is required"),
-          // store_name: Yup.string().required("store name is required"),
-          // email: Yup.string()
-          //   .email("Must be a valid email")
-          //   .max(255)
-          //   .required("Email is required"),
+          name: Yup.string().max(255).required("Name is required"),
+          store_name: Yup.string().required("store name is required"),
+          email: Yup.string()
+            .email("Must be a valid email")
+            .max(255)
+            .required("Email is required"),
           // password: Yup.string().max(255).required("Password is required"),
           // confirmpassword: Yup.string().when("password", {
           //   is: (val) => (val && val.length > 0 ? true : false),
@@ -102,11 +102,11 @@ const AuthRegister = () => {
           //     "Both password need to be the same"
           //   ),
           // }),
-          // address: Yup.string().required("Address is required"),
-          // phone_number: Yup.number().required("Phone number is required"),
-          // area_id: Yup.number().required("Area is required"),
-          // ntn: Yup.number().required("ntn number is required"),
-          // nic_number: Yup.number().required("nic number is required"),
+          address: Yup.string().required("Address is required"),
+          phone_number: Yup.string().max(11).required("Phone number is required"),
+          area_id: Yup.number().required("Area is required"),
+          ntn: Yup.number().required("ntn number is required"),
+          nic_number: Yup.string().max(13).required("nic number is required"),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           console.log({ values });
@@ -252,7 +252,7 @@ const AuthRegister = () => {
                     </FormHelperText>
                   )}
                 </Stack>
-                <FormControl fullWidth sx={{ mt: 2 }}>
+                {/* <FormControl fullWidth sx={{ mt: 2 }}>
                   <Grid container spacing={2} alignItems="center">
                     <Grid item>
                       <Box
@@ -270,7 +270,7 @@ const AuthRegister = () => {
                       </Typography>
                     </Grid>
                   </Grid>
-                </FormControl>
+                </FormControl> */}
               </Grid>
               <Grid item xs={12}>
                 <Stack spacing={1}>
@@ -363,12 +363,12 @@ const AuthRegister = () => {
               {/* <Grid item xs={12}>
                 <Typography>Area*</Typography>
               </Grid> */}
-              <Grid item xs={12} sx={{paddingTop: '10px !important'}}>
+              <Grid item xs={12} sx={{paddingTop: '34px !important'}}>
                 <FormControl
                   fullWidth
                   error={Boolean(touched.area_id && errors.area_id)}
                 >
-                  {/* <InputLabel htmlFor="add-area_id">Area*</InputLabel> */}
+                  <InputLabel htmlFor="add-area_id">Area*</InputLabel>
                   <Select
                     fullWidth
                     sx={{ borderRadius: "15px", backgroundColor: "#D9D9D9" }}
