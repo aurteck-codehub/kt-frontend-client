@@ -88,12 +88,12 @@ const AuthRegister = () => {
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          name: Yup.string().max(255).required("Name is required"),
-          store_name: Yup.string().required("store name is required"),
-          email: Yup.string()
-            .email("Must be a valid email")
-            .max(255)
-            .required("Email is required"),
+          // name: Yup.string().max(255).required("Name is required"),
+          // store_name: Yup.string().required("store name is required"),
+          // email: Yup.string()
+          //   .email("Must be a valid email")
+          //   .max(255)
+          //   .required("Email is required"),
           // password: Yup.string().max(255).required("Password is required"),
           // confirmpassword: Yup.string().when("password", {
           //   is: (val) => (val && val.length > 0 ? true : false),
@@ -102,11 +102,11 @@ const AuthRegister = () => {
           //     "Both password need to be the same"
           //   ),
           // }),
-          address: Yup.string().required("Address is required"),
-          phone_number: Yup.string().max(11).required("Phone number is required"),
-          area_id: Yup.number().required("Area is required"),
-          ntn: Yup.number().required("ntn number is required"),
-          nic_number: Yup.string().max(13).required("nic number is required"),
+          // address: Yup.string().required("Address is required"),
+          // phone_number: Yup.string().max(11).required("Phone number is required"),
+          // area_id: Yup.number().required("Area is required"),
+          // ntn: Yup.number().required("ntn number is required"),
+          // nic_number: Yup.string().max(13).required("nic number is required"),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           console.log({ values });
