@@ -61,7 +61,13 @@ const DetailCart = ({shippingAddress, setShippingAddress, contact, setContact}) 
                 label="Phone Number*"
                 labelHtml={"contact-number"}
                 value={contact?.phone_number}
-                onChange={(e) => setContact({...contact, phone_number: e.target.value})}
+                // onChange={(e) => setContact({...contact, phone_number: e.target.value})}
+                onChange={(e) => {
+                  const number = e.target.value.replace(/\D/g, ''); // remove all non-numeric characters
+                  if (number.length <= 11) { // check the length
+                    setContact({...contact, phone_number: number});
+                  }
+                }}
                 required
               />
             </Stack>
@@ -167,7 +173,13 @@ const DetailCart = ({shippingAddress, setShippingAddress, contact, setContact}) 
                 label="Phone Number*"
                 labelHtml={"shipping-phone-number"}
                 value={shippingAddress?.phone_number}
-                onChange={(e) => setShippingAddress({...shippingAddress, phone_number: e.target.value})}
+                // onChange={(e) => setShippingAddress({...shippingAddress, phone_number: e.target.value})}
+                onChange={(e) => {
+                  const number = e.target.value.replace(/\D/g, ''); // remove all non-numeric characters
+                  if (number.length <= 11) { // check the length
+                    setShippingAddress({...shippingAddress, phone_number: number});
+                  }
+                }}
                 required
               />
             </Stack>

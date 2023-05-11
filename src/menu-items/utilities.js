@@ -25,14 +25,14 @@ const utilities = {
   title: "Utilities",
   type: "group",
   children: [
-    {
-      id: "util-profile",
-      title: "Profile",
-      type: "item",
-      url: "/dashboard/profile",
-      icon: icons.IconUser,
-      breadcrumbs: false,
-    },
+    // {
+    //   id: "util-profile",
+    //   title: "Profile",
+    //   type: "item",
+    //   url: "/dashboard/profile",
+    //   icon: icons.IconUser,
+    //   breadcrumbs: false,
+    // },
     {
       id: "util-orders",
       title: "My Orders",

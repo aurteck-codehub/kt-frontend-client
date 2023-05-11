@@ -42,6 +42,7 @@ const ProfileSection = () => {
   const [notification, setNotification] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState();
 
   const anchorRef = useRef(null);
   const handleLogout = async () => {
@@ -74,13 +75,15 @@ const ProfileSection = () => {
 
   const prevOpen = useRef(open);
   useEffect(() => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    setName(profile);
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
 
     prevOpen.current = open;
   }, [open]);
-
+  console.log({name})
   return (
     <>
       <Chip
@@ -169,10 +172,10 @@ const ProfileSection = () => {
                           variant="h4"
                           sx={{ fontWeight: 400 }}
                         >
-                          {data?.user?.name ?? ""}
+                          {/* {name?.name ?? ""} */}
                         </Typography>
                       </Stack>
-                      <Typography variant="subtitle2">User</Typography>
+                      <Typography variant="subtitle2">{name?.name}</Typography>
                     </Stack>
                   </Box>
                   <PerfectScrollbar

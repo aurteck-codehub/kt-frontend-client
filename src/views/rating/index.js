@@ -38,7 +38,7 @@ const Rating = () => {
                                         setCurrentRowData={setCurrentRowData}
                                         reviewsList={reviewsList}
                                         setReviewsList={setReviewsList}
-                                        setOpen={setOpen}
+                                        setOpenEdit={setOpen}
                                     />
                                 </Box>
                         </Grid>

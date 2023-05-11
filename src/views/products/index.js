@@ -18,7 +18,7 @@ const Dashboard = () => {
   console.log({data})
   const discount = data?.map((item) => item?.Product)
   const { data: products } = useSWR(`${API_URL}/product`, fetcher)
-  console.log({products})
+  console.log({discount})
   return (
     <Container maxWidth="xl">
       <Grid container gap={6}>
@@ -31,6 +31,7 @@ const Dashboard = () => {
           </Suspense>
         </Grid>
       </Grid>
+      {discount?.length ?
       <Stack sx={{ mt: 10, mb: 5 }}>
         <Typography
           variant="h2"
@@ -56,6 +57,7 @@ const Dashboard = () => {
         </Grid>
         <ProductSlider data={!discount ? [] : discount}/>
       </Stack>
+      : ''}
       <Stack>
         <Grid
           container
@@ -74,7 +76,7 @@ const Dashboard = () => {
               <Typography variant="h1" as="span" color={"inherit"}>
                 T
               </Typography>
-              op &
+              op
               <Typography variant="h1" as="span" color={"inherit"}>
                 &nbsp;S
               </Typography>
@@ -95,7 +97,7 @@ const Dashboard = () => {
         </Grid>
         <ProductSlider data={!products ? [] : products?.products}/>
       </Stack>
-      <Stack>
+      {/* <Stack>
         <Grid
           container
           justifyContent={"center"}
@@ -129,7 +131,7 @@ const Dashboard = () => {
           </NextLink>
         </Grid>
         <ProductSlider data={!discount ? [] : discount}/>
-      </Stack>
+      </Stack> */}
       <Stack>
         <Grid
           container
