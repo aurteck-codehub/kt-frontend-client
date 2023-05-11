@@ -1,5 +1,6 @@
 "use client";
 import {
+  Alert,
   Grid,
   Card,
   CardHeader,
@@ -12,6 +13,7 @@ import {
   Box,
   TextField,
   Button,
+  DialogActions,
 } from "@mui/material";
 import MainCard from "@/ui-component/cards/MainCard";
 import { useEffect, useState } from "react";
@@ -24,7 +26,7 @@ import PrimaryButton from "../../components/PrimaryButton";
 
 const SettingsView = () => {
   const [user, setUser] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -135,9 +137,12 @@ const SettingsView = () => {
           </Grid>
         </Grid>
       </MainCard>
-      <Dialog open={open} onClose={handleClose} fullWidth>
+      <Dialog open={open}>
+      <Alert onClose={handleClose}>Password Changed Successfully</Alert>
+      </Dialog>
+      {/* <Dialog open={open} fullWidth maxWidth="sm">
         <DialogContent>
-          <Grid container direction={{ xs: "column", md: "row" }} spacing={2}>
+          <Grid container direction={{ xs: "column", md: "row" }} spacing={1}>
             <Grid item xs>
               <Box
                 sx={{
@@ -147,30 +152,17 @@ const SettingsView = () => {
                   flexDirection: "column",
                 }}
               >
-                <Box sx={{ width: "70%", height: "120px" }}>
+                <Box sx={{ width: "50%", height: "50px", backgroundColor: 'yellow' }}>
                   <Box
                     sx={{
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
                       flexDirection: "column",
-                      marginTop: "43px",
                     }}
                   >
-                    {/* <Image
-                      src={tickcircle}
-                      width={67}
-                      height={67}
-                      alt="circle"
-                    /> */}
-                    {/* <Typography variant="h2" color="custom.orange" mt="63px">
-                      THANK YOU
-                    </Typography>
-                    <Typography variant="h3" mt="21px" textAlign={"center"}>
-                      For Registeration
-                    </Typography> */}
                     <Typography variant="h5" mt="21px" fontWeight={400}>
-                      {message}
+                      {message} password changes successfully
                     </Typography>
                   </Box>
                 </Box>
@@ -178,7 +170,12 @@ const SettingsView = () => {
             </Grid>
           </Grid>
         </DialogContent>
-      </Dialog>
+        <DialogActions>
+    <Button onClick={handleClose} variant="contained" color="primary">
+      OK
+    </Button>
+  </DialogActions>
+      </Dialog> */}
     </>
   );
 };

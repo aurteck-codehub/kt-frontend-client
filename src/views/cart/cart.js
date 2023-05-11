@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 
 const Cart = ({cart}) => {
   const router = useRouter();
-  
-  const totalPrice = cart?.reduce((sum, item) => sum + parseFloat(item?.Product?.price), 0)
+  console.log({cart})
+  const totalPrice = cart?.reduce((sum, item) => sum + (parseFloat(item?.Product?.price) * item?.quantity), 0)
   const discount = cart?.reduce((acc, { Discount }) => {
     const price = Discount ? Number(Discount?.discount_amount) : 0;
     console.log({price})
