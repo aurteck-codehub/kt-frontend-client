@@ -20,7 +20,13 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 // import AnimateButton from "@/components/AnimateButton";
 import { NAV_ITEMS, OTHER_LINK, hideLayoutRoutes } from "@/utils";
-import { CiFacebook, CiYoutube, CiInstagram, CiPhone } from "react-icons/ci";
+import {
+  CiFacebook,
+  CiYoutube,
+  CiInstagram,
+  CiPhone,
+  CiLinkedin,
+} from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
 import Input from "@/components/InputField";
@@ -70,13 +76,18 @@ const Footer = () => {
                   Follow Us
                   <Box sx={{ mt: 1, display: "flex" }}>
                     <Box sx={{ px: 1 }}>
-                      <CiFacebook color="white" size={24} />
+                      <NextLink
+                        href="https://www.facebook.com/"
+                        target="_blank">
+                        <CiFacebook color="white" size={24} />
+                      </NextLink>
                     </Box>
                     <Box sx={{ px: 1 }}>
-                      <CiYoutube color="white" size={24} />
-                    </Box>
-                    <Box sx={{ px: 1 }}>
-                      <CiInstagram color="white" size={24} />
+                      <NextLink
+                        href="https://www.facebook.com/"
+                        target="_blank">
+                        <CiLinkedin color="white" size={24} />
+                      </NextLink>
                     </Box>
                   </Box>
                 </Typography>
@@ -331,12 +342,14 @@ const Footer = () => {
                   {"© 2023,"}{" "}
                   <NextLink
                     href="https://www.karobartechnologies.com/"
+                    target="_blank"
                     style={{ color: "white", textDecoration: "none" }}>
                     karobartechnologies Pvt. Ltd.
                   </NextLink>{" "}
                   Designed & Developed by{" "}
                   <NextLink
                     href="https://www.aurteck.com/"
+                    target="_blank"
                     style={{ color: "white", textDecoration: "none" }}>
                     AURTeck Pvt. Ltd.
                   </NextLink>
