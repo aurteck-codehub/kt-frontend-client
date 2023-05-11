@@ -56,16 +56,21 @@ const SupplyPartnersSlider = () => {
           py: 5,
           fontWeight: "600",
           textTransform: "uppercase",
-        }}
-      >
-        Supply Partners
+        }}>
+        S
+        <Typography as="span" variant="h2" sx={{ color: "custom.green" }}>
+          UPPLY
+        </Typography>{" "}
+        P
+        <Typography as="span" variant="h2" sx={{ color: "custom.green" }}>
+          ARTNERS
+        </Typography>
       </Typography>
       <Slider {...settings}>
         {sliderImages.map((image) => (
           <div
             key={image.alt}
-            style={{ objectFit: "contain", overflow: "hidden" }}
-          >
+            style={{ objectFit: "contain", overflow: "hidden" }}>
             <Image src={image.image} alt={image.alt} width={100} height={100} />
           </div>
         ))}

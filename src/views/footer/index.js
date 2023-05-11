@@ -37,8 +37,7 @@ const Footer = () => {
           sx={{
             width: "100%",
             backgroundColor: theme.palette.primary.main,
-          }}
-        >
+          }}>
           <Container maxWidth="xl" sx={{ mt: 10 }}>
             <Grid container spacing={3}>
               <Grid
@@ -47,8 +46,7 @@ const Footer = () => {
                 sm={4}
                 container
                 justifyContent={"center"}
-                direction="column"
-              >
+                direction="column">
                 <NextLink href={"/"}>
                   <Image
                     src={LogoIcon}
@@ -61,16 +59,14 @@ const Footer = () => {
                   className={inter.className}
                   color="white"
                   lineHeight={"22px"}
-                  sx={{ py: 2 }}
-                >
+                  sx={{ py: 2 }}>
                   We digitally transforming the physical retail ecosystem of
                   Pakistan to meet the demand and expectation of modern customer
                 </Typography>
                 <Typography
                   color="white"
                   variant="h4"
-                  sx={{ mt: 2, fontWeight: "bold" }}
-                >
+                  sx={{ mt: 2, fontWeight: "bold" }}>
                   Follow Us
                   <Box sx={{ mt: 1, display: "flex" }}>
                     <Box sx={{ px: 1 }}>
@@ -87,8 +83,7 @@ const Footer = () => {
                 <Typography
                   color="white"
                   variant="h4"
-                  sx={{ mt: 2, fontWeight: "bold" }}
-                >
+                  sx={{ mt: 2, fontWeight: "bold" }}>
                   Contact Us
                   <Box sx={{ mt: 1, ml: 1 }}>
                     <Box
@@ -96,8 +91,7 @@ const Footer = () => {
                         display: "flex",
                         justifyItems: "center",
                         alignItems: "center",
-                      }}
-                    >
+                      }}>
                       <CiPhone color="white" size={24} />
                       <Typography sx={{ px: 1, py: 1, fontWeight: "bold" }}>
                         +92 344 4023566
@@ -108,8 +102,7 @@ const Footer = () => {
                         display: "flex",
                         justifyItems: "center",
                         alignItems: "center",
-                      }}
-                    >
+                      }}>
                       <HiOutlineMail color="white" size={24} />
                       <Typography sx={{ px: 2, py: 1, fontWeight: "bold" }}>
                         junaid.ilyas@karobartechnologies.com
@@ -120,8 +113,7 @@ const Footer = () => {
                         display: "flex",
                         justifyItems: "center",
                         alignItems: "center",
-                      }}
-                    >
+                      }}>
                       <IoLocationOutline color="white" size={24} />
                       <Typography sx={{ px: 2, py: 1, fontWeight: "bold" }}>
                         Lahore, Punjab, Pakistan 54,000
@@ -140,13 +132,11 @@ const Footer = () => {
                       <NextLink
                         key={nav.label}
                         href={nav.href}
-                        style={{ textDecoration: "none" }}
-                      >
+                        style={{ textDecoration: "none" }}>
                         <Typography
                           color="white"
                           variant="subtitle1"
-                          sx={{ py: 1 }}
-                        >
+                          sx={{ py: 1 }}>
                           {nav.label}
                         </Typography>
                       </NextLink>
@@ -160,13 +150,11 @@ const Footer = () => {
                       <NextLink
                         key={nav.label}
                         href={nav.href}
-                        style={{ textDecoration: "none" }}
-                      >
+                        style={{ textDecoration: "none" }}>
                         <Typography
                           color="white"
                           variant="subtitle1"
-                          sx={{ py: 1 }}
-                        >
+                          sx={{ py: 1 }}>
                           {nav.label}
                         </Typography>
                       </NextLink>
@@ -180,8 +168,7 @@ const Footer = () => {
                     color="white"
                     variant="h4"
                     textAlign={"left"}
-                    sx={{ mt: 2 }}
-                  >
+                    sx={{ mt: 2 }}>
                     Message Us
                   </Typography>
                 </Grid>
@@ -214,8 +201,7 @@ const Footer = () => {
                       setErrors({ submit: err.message });
                       setSubmitting(false);
                     }
-                  }}
-                >
+                  }}>
                   {({
                     errors,
                     handleBlur,
@@ -243,8 +229,7 @@ const Footer = () => {
                             {touched.name && errors.name && (
                               <FormHelperText
                                 error
-                                id="standard-weight-helper-text-name-footer"
-                              >
+                                id="standard-weight-helper-text-name-footer">
                                 {errors.name}
                               </FormHelperText>
                             )}
@@ -266,8 +251,7 @@ const Footer = () => {
                             {touched.email && errors.email && (
                               <FormHelperText
                                 error
-                                id="standard-weight-helper-text-email-login-footer"
-                              >
+                                id="standard-weight-helper-text-email-login-footer">
                                 {errors.email}
                               </FormHelperText>
                             )}
@@ -291,8 +275,7 @@ const Footer = () => {
                             {touched.message && errors.message && (
                               <FormHelperText
                                 error
-                                id="standard-weight-helper-text-message-footer"
-                              >
+                                id="standard-weight-helper-text-message-footer">
                                 {errors.message}
                               </FormHelperText>
                             )}
@@ -302,25 +285,23 @@ const Footer = () => {
                           item
                           xs={12}
                           container
-                          justifyContent={"flex-end"}
-                        >
+                          justifyContent={"flex-end"}>
                           {/* <AnimateButton> */}
-                            <Button
-                              disableElevation
-                              disabled={isSubmitting}
-                              size="large"
-                              type="submit"
-                              variant="outlined"
-                              sx={{
-                                borderColor: "white",
-                                fontWeight: "bold",
-                                textTransform: "capitalize",
-                                boxShadow: "none",
-                                color: "white",
-                              }}
-                            >
-                              Send
-                            </Button>
+                          <Button
+                            disableElevation
+                            disabled={isSubmitting}
+                            size="large"
+                            type="submit"
+                            variant="outlined"
+                            sx={{
+                              borderColor: "white",
+                              fontWeight: "bold",
+                              textTransform: "capitalize",
+                              boxShadow: "none",
+                              color: "white",
+                            }}>
+                            Send
+                          </Button>
                           {/* </AnimateButton> */}
                         </Grid>
                       </Grid>
@@ -338,8 +319,7 @@ const Footer = () => {
                 justifyContent: "center",
                 py: 2,
                 alignItems: "center",
-              }}
-            >
+              }}>
               <Box sx={{ maxWidth: 480, display: "flex" }}>
                 <Typography
                   className={inter.className}
@@ -347,11 +327,19 @@ const Footer = () => {
                   textAlign={"center"}
                   component="p"
                   variant="caption"
-                  gutterBottom={false}
-                >
-                  {
-                    "© 2023, karobartechnologies Pvt. Ltd. Designed & Developed by karobartechnologies.com"
-                  }
+                  gutterBottom={false}>
+                  {"© 2023,"}{" "}
+                  <NextLink
+                    href="https://www.karobartechnologies.com/"
+                    style={{ color: "white", textDecoration: "none" }}>
+                    karobartechnologies Pvt. Ltd.
+                  </NextLink>{" "}
+                  Designed & Developed by{" "}
+                  <NextLink
+                    href="https://www.aurteck.com/"
+                    style={{ color: "white", textDecoration: "none" }}>
+                    AURTeck Pvt. Ltd.
+                  </NextLink>
                 </Typography>
               </Box>
             </Box>
