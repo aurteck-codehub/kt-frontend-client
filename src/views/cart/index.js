@@ -13,6 +13,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 const DetailCart = () => {
   const [cart, setCart] = useState([]);
   const [userId, setUserId] = useState('');
+  const [newQuantity, setNewQuantity] = useState(0);
 
   useEffect(() => {
     const user = JSON?.parse(localStorage.getItem('user'))
@@ -24,7 +25,7 @@ const DetailCart = () => {
         setCart(res?.data)
       })
     })
-  },[])
+  },[newQuantity])
 
   const { data } = useSWR(`${API_URL}/product`, fetcher)
 
@@ -32,7 +33,7 @@ const DetailCart = () => {
   <Container maxWidth="xl" disableGutters>
     <Grid container direction={{ xs: "column", md: "row" }} spacing={2}>
       <Grid item xs>
-        <Details cart={cart} setCart={setCart} userId={userId}/>
+        <Details cart={cart} setCart={setCart} userId={userId} newQuantity={newQuantity} setNewQuantity={setNewQuantity}/>
       </Grid>
       <Grid item xs={12} sm={4} md={3}>
         <Cart cart={cart} setCart={setCart}/>

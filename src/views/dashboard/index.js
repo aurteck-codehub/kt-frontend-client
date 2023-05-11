@@ -35,18 +35,19 @@ const DashBoard = () => {
       :
       <Grid container spacing={gridSpacing}>
         <Grid item xs={12} sm={6} md={4}>
-          <Card>
+          <Card sx={{paddingBottom: '4px'}}>
             <CardHeader
               disableTypography
-              // action={
-              //   <IconButton aria-label="settings">
-              //     <EditIcon />
-              //   </IconButton>
-              // }
+              action={
+                <IconButton aria-label="settings">
+                  <EditIcon />
+                </IconButton>
+              }
               title={<Typography variant="h3">Personal Profile</Typography>}
             />
             <Grid container direction={"column"} p={3}>
               <Stack spacing={1}>
+                <Typography variant="h3"></Typography>
                 <Typography>{profile?.name ?? ""}</Typography>
                 <Typography>{profile?.phone_number}</Typography>
                 <Typography>{user?.email}</Typography>
@@ -58,11 +59,11 @@ const DashBoard = () => {
           <Card>
             <CardHeader
               disableTypography
-              // action={
-              //   <IconButton aria-label="settings">
-              //     <EditIcon />
-              //   </IconButton>
-              // }
+              action={
+                <IconButton aria-label="settings">
+                  <EditIcon />
+                </IconButton>
+              }
               title={<Typography variant="h3">Address Book</Typography>}
             />
             <Grid container direction={"column"} p={2}>

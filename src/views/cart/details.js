@@ -15,7 +15,7 @@ import { Checkbox } from "@/components";
 import axios from "axios";
 import { API_URL } from "../../configuration";
 
-const DetailCart = ({cart, setCart, userId}) => {
+const DetailCart = ({cart, setCart, userId, newQuantity, setNewQuantity}) => {
   let discount = [];
   const theme = useTheme();
   const deleteIcon = {
@@ -24,6 +24,18 @@ const DetailCart = ({cart, setCart, userId}) => {
       color: "#9B2915",
     },
   };
+
+  const handleQuantityChange = async (cartId, newQuantity) => {
+    try {
+      const response = await axios.put(`${API_URL}/shoppingcartitem/${cartId}`, {
+        quantity: newQuantity
+      });
+      setNewQuantity(newQuantity)
+      console.log(response.data); // log the updated cart item
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const handleDelete = (e, id) => {
     e.preventDefault();
@@ -97,6 +109,12 @@ const DetailCart = ({cart, setCart, userId}) => {
                   <IconButton
                     sx={{ bgcolor: "#b4b4b4", borderRadius: 1 }}
                     size="small"
+                    onClick={() => {
+                      const newQuantity = item?.quantity + 1;
+                      if(newQuantity <= item?.Product?.quantity) {
+                      handleQuantityChange(item?.id, newQuantity);
+                    }
+                    }}
                   >
                     <AddIcon />
                   </IconButton>
@@ -106,6 +124,12 @@ const DetailCart = ({cart, setCart, userId}) => {
                   <IconButton
                     sx={{ bgcolor: "#b4b4b4", borderRadius: 1 }}
                     size="small"
+                    onClick={() => {
+                      const newQuantity = item?.quantity - 1;
+                      if (newQuantity >= 1) {
+                        handleQuantityChange(item?.id, newQuantity);
+                      }
+                    }}
                   >
                     <RemoveIcon />
                   </IconButton>

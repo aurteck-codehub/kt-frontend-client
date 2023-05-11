@@ -26,7 +26,7 @@ import PrimaryButton from "../../components/PrimaryButton";
 
 const SettingsView = () => {
   const [user, setUser] = useState([]);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -138,7 +138,7 @@ const SettingsView = () => {
         </Grid>
       </MainCard>
       <Dialog open={open}>
-      <Alert onClose={handleClose}>Password Changed Successfully</Alert>
+      <Alert onClose={handleClose}>{message}</Alert>
       </Dialog>
       {/* <Dialog open={open} fullWidth maxWidth="sm">
         <DialogContent>

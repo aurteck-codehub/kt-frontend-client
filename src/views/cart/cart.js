@@ -7,6 +7,7 @@ const Cart = ({cart}) => {
   const router = useRouter();
   console.log({cart})
   const totalPrice = cart?.reduce((sum, item) => sum + (parseFloat(item?.Product?.price) * item?.quantity), 0)
+  const totalQuantity = cart?.reduce((sum, item) => sum + item?.quantity, 0);
   const discount = cart?.reduce((acc, { Discount }) => {
     const price = Discount ? Number(Discount?.discount_amount) : 0;
     console.log({price})
@@ -41,9 +42,21 @@ const Cart = ({cart}) => {
             alignItems="center"
             py={1}
           >
-            <Typography>Original Price ({num} Items)</Typography>
+            <Typography>Original Price ({num > 1 ?  `${num} Items` : `${num} Item`})</Typography>
             <Typography size="sm" textAlign="end">
               Rs. <span>{totalPrice}.00</span>
+            </Typography>
+          </Stack>
+          <Stack
+            spacing={0}
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            py={1}
+          >
+            <Typography>Total Quantity</Typography>
+            <Typography size="sm" textAlign="end">
+              <span>{totalQuantity}</span>
             </Typography>
           </Stack>
           <Stack
