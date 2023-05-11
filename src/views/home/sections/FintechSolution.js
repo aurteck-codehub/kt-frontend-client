@@ -28,8 +28,7 @@ const FintechSolution = () => {
       maxWidth="md"
       sx={{
         py: 10,
-      }}
-    >
+      }}>
       <Grid container spacing={8} sx={{ mb: 10 }}>
         <Grid item xs={12} md={6} sx={{ height: 500 }}>
           <Image
@@ -47,8 +46,7 @@ const FintechSolution = () => {
               fontWeight: "600",
               textTransform: "uppercase",
               lineHeight: "84px",
-            }}
-          >
+            }}>
             Fintech Solution
           </Typography>
           <Typography textAlign={"justify"}>
@@ -62,31 +60,28 @@ const FintechSolution = () => {
             expanded={expanded === "panel1"}
             onChange={handleChange("panel1")}
             sx={{ boxShadow: "none", py: 3 }}
-            disableGutters
-          >
+            disableGutters>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon sx={{ color: "#199088" }} />}
               aria-controls="panel1a-content"
               id="panel1a-header"
-              sx={{ padding: 0 }}
-            >
+              sx={{ padding: 0 }}>
               <Typography
                 sx={{
                   color: "custom.green",
                   fontWeight: "700",
                   textTransform: "uppercase",
-                }}
-              >
+                }}>
                 Book Keeping Feature
               </Typography>
             </AccordionSummary>
             <AccordionDetails sx={{ padding: 0 }}>
               <Typography>
-                Bookkeeping is a critical aspect of financial management. At KT,
-                we understand the importance of accurate and up-to-date
-                bookkeeping. Our easy-to-use platform offers a range of
-                bookkeeping features, including transaction tracking, financial
-                reporting, and reconciliation, to help you manage your finances
+                Book keeping is a critical aspect of financial management. At
+                KT, we understand the importance of accurate and up-to-date book
+                keeping. Our easy-to-use platform offers a range of book keeping
+                features, including transaction tracking, financial reporting,
+                and reconciliation, to help you manage your finances
                 efficiently.
               </Typography>
             </AccordionDetails>
@@ -95,21 +90,18 @@ const FintechSolution = () => {
             expanded={expanded === "panel2"}
             onChange={handleChange("panel2")}
             sx={{ boxShadow: "none" }}
-            disableGutters
-          >
+            disableGutters>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon sx={{ color: "#199088" }} />}
               aria-controls="panel1a-content"
               id="panel1a-header"
-              sx={{ padding: 0 }}
-            >
+              sx={{ padding: 0 }}>
               <Typography
                 sx={{
                   color: "custom.green",
                   fontWeight: "700",
                   textTransform: "uppercase",
-                }}
-              >
+                }}>
                 Credit on Demand
               </Typography>
             </AccordionSummary>
@@ -129,8 +121,7 @@ const FintechSolution = () => {
         container
         gap={{ xs: 2, md: 4 }}
         justifyContent="center"
-        alignItems={"center"}
-      >
+        alignItems={"center"}>
         <Grid
           item
           xs={12}
@@ -143,13 +134,11 @@ const FintechSolution = () => {
             bgcolor: "custom.grayLight",
             padding: "20px",
             borderRadius: 2,
-          }}
-        >
+          }}>
           <BsCreditCard size={80} color="#199088" />
           <Typography
             textAlign={"center"}
-            sx={{ fontWeight: 700, color: "custom.green", mt: 3 }}
-          >
+            sx={{ fontWeight: 700, color: "custom.green", mt: 3 }}>
             Fast & Easy Credit Access
           </Typography>
         </Grid>
@@ -165,13 +154,11 @@ const FintechSolution = () => {
             bgcolor: "custom.grayLight",
             padding: "25px",
             borderRadius: 2,
-          }}
-        >
+          }}>
           <BsCreditCard size={80} color="#199088" />
           <Typography
             textAlign={"center"}
-            sx={{ fontWeight: 700, color: "custom.green", mt: 3 }}
-          >
+            sx={{ fontWeight: 700, color: "custom.green", mt: 3 }}>
             Effortless Spending Solution
           </Typography>
         </Grid>
@@ -187,13 +174,11 @@ const FintechSolution = () => {
             bgcolor: "custom.grayLight",
             padding: "20px",
             borderRadius: 2,
-          }}
-        >
+          }}>
           <Image src={loopImage} alt="image" width={90} />
           <Typography
             textAlign={"center"}
-            sx={{ fontWeight: 700, color: "custom.green", mt: 3 }}
-          >
+            sx={{ fontWeight: 700, color: "custom.green", mt: 3 }}>
             Stress-Free Cash Flow
           </Typography>
         </Grid>
