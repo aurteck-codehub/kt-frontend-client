@@ -92,6 +92,10 @@ const OrdersView = () => {
         setMessage('Your order is cancelled.')
         setOpenDialog(true);
         setOpen(false);
+        axios.get(`${API_URL}/order/user/${user?.user_id}`)
+        .then((res) => {
+        setOrders(res?.data);
+        })
       })
     } else {
       setMessage(`Your order is shipped. Can not be cancelled now.`)
