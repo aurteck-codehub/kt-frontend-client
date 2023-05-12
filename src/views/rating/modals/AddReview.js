@@ -61,7 +61,7 @@ const AddReview = ({ open, setOpen, setReviewsList, currentRowData }) => {
                     validationSchema={Yup.object().shape({
                         product_id: Yup.number().required('Product is required'),
                         rating: Yup.number().required('Rating is required'),
-                        review_text: Yup.string().required('Review is required'),
+                        // review_text: Yup.string().required('Review is required'),
                     })}
                     onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                         console.log({values})

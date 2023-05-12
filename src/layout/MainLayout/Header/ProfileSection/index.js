@@ -193,7 +193,7 @@ const ProfileSection = () => {
                           my: 2,
                         }}
                       >
-                        <CardContent>
+                        {/* <CardContent>
                           <Grid container spacing={3} direction="column">
                             <Grid item>
                               <Grid
@@ -243,7 +243,7 @@ const ProfileSection = () => {
                               </Grid>
                             </Grid>
                           </Grid>
-                        </CardContent>
+                        </CardContent> */}
                       </Card>
                       <Divider />
                       <List
@@ -262,30 +262,6 @@ const ProfileSection = () => {
                           },
                         }}
                       >
-                        <ListItemButton
-                          sx={{
-                            borderRadius: `${customization.borderRadius}px`,
-                          }}
-                          selected={selectedIndex === 0}
-                          onClick={(event) =>
-                            handleListItemClick(
-                              event,
-                              0,
-                              "/dashboard"
-                            )
-                          }
-                        >
-                          <ListItemIcon>
-                            <IconSettings stroke={1.5} size="1.3rem" />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={
-                              <Typography variant="body2">
-                                Account Settings
-                              </Typography>
-                            }
-                          />
-                        </ListItemButton>
                         <ListItemButton
                           sx={{
                             borderRadius: `${customization.borderRadius}px`,

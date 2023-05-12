@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import {
+  Alert,
+  Dialog,
   Grid,
   TableBody,
   MenuItem,
@@ -9,8 +11,6 @@ import {
   TableRow,
   Typography,
   Checkbox,
-  Stack,
-  Avatar,
   IconButton,
 } from "@mui/material";
 import MainCard from "@/ui-component/cards/MainCard";
@@ -52,20 +52,59 @@ const useRowStyles = makeStyles({
 const OrdersView = () => {
   const [selected, setSelected] = useState([]);
   const [open, setOpen] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [currentRowId, setCurrentRowId] = useState(null);
+  const [currentStatus, setCurrentStatus] = useState('')
   const [orders, setOrders] = useState([]);
+  const [message, setMessage] = useState('');
+  const [userId, setUserId] = useState('');
   const classes = useRowStyles();
 
   useEffect(() => {
     const user = JSON?.parse(localStorage.getItem('profile'))
+    setUserId(user?.user_id);
     axios.get(`${API_URL}/order/user/${user?.user_id}`)
     .then((res) => {
       setOrders(res?.data);
     })
-  },[])
+  },[message])
 
-  const handleDeleteClick = (id) => {};
-  const handleEditClick = (id) => {};
-  const handleOpenMenu = (event) => {
+  const handleDeleteClick = (id) => {
+    if(currentStatus === 'pending' || 'delivered' || 'cancelled'){
+      axios.delete(`${API_URL}/order/${currentRowId}`).then((res) => {
+        setMessage('Your order is deleted.')
+        setOpenDialog(true);
+        setOpen(false);
+        axios.get(`${API_URL}/order/user/${user?.user_id}`)
+        .then((res) => {
+        setOrders(res?.data);
+        })  
+      })
+    } else {
+      setMessage(`Your order is in processing. Can not be deleted now.`)
+      setOpenDialog(true);
+      setOpen(false);
+    }
+  };
+  const handleEditClick = (id) => {
+    if(currentStatus === 'pending' || 'processing'){
+      axios.put(`${API_URL}/order/${currentRowId}`, { status: 'cancelled' }).then((res) => {
+        setMessage('Your order is cancelled.')
+        setOpenDialog(true);
+        setOpen(false);
+      })
+    } else {
+      setMessage(`Your order is shipped. Can not be cancelled now.`)
+      setOpenDialog(true);
+      setOpen(false);
+    }
+  };
+  console.log({currentStatus});
+  const handleOpenMenu = (event, row) => {
+    const { id } = row;
+    const { Order } = row;
+    setCurrentRowId(id);
+    setCurrentStatus(Order?.status);
     setOpen(event.currentTarget);
   };
 
@@ -153,7 +192,7 @@ const OrdersView = () => {
                   <IconButton
                     size="large"
                     color="inherit"
-                    onClick={handleOpenMenu}
+                    onClick={(e) => handleOpenMenu(e, row)}
                   >
                     <Iconify icon={"eva:more-vertical-fill"} />
                   </IconButton>
@@ -181,15 +220,18 @@ const OrdersView = () => {
           },
         }}
       >
-        <MenuItem>
-          <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
-          Edit
+        <MenuItem onClick={handleEditClick}>
+          {/* <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} /> */}
+          Cancel Order
         </MenuItem>
-        <MenuItem sx={{ color: "error.main" }}>
+        <MenuItem onClick={handleDeleteClick} sx={{ color: "error.main" }}>
           <Iconify icon={"eva:trash-2-outline"} sx={{ mr: 2 }} />
           Delete
         </MenuItem>
       </Popover>
+      <Dialog open={openDialog}>
+      <Alert onClose={() => setOpenDialog(false)}>{message}</Alert>
+      </Dialog>
     </MainCard>
   );
 };
