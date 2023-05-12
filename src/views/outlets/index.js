@@ -20,6 +20,7 @@ const OutletsView = () => {
   const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
   const [outlet, setOutlet] = useState([]);
+  const [shipping, setShipping] = useState([]);
 
   useEffect(() => {
     const authUser = JSON?.parse(localStorage.getItem("user"));
@@ -27,6 +28,10 @@ const OutletsView = () => {
     axios.get(`${API_URL}/store/user/${authUser?.id}`)
     .then((res) => {
       setOutlet(res?.data);
+    })
+    axios.get(`${API_URL}/shippingaddress/user/${authUser?.id}`)
+    .then((res) => {
+      setShipping(res.data)
     })
     const userProfile = JSON.parse(localStorage.getItem("profile"));
     setProfile(userProfile)
@@ -40,18 +45,19 @@ const OutletsView = () => {
       :
       <Grid container spacing={gridSpacing}>
         <Grid item xs={12} sm={6} md={4}>
-          <Card>
+          <Card sx={{height: '250px'}}>
             <CardHeader
               disableTypography
-              // action={
-              //   <IconButton aria-label="settings">
-              //     <EditIcon />
-              //   </IconButton>
-              // }
+              action={
+                <IconButton aria-label="settings">
+                  <EditIcon />
+                </IconButton>
+              }
               title={<Typography variant="h3">{outlet?.name}</Typography>}
             />
             <Grid container direction={"column"} p={3}>
               <Stack spacing={1}>
+                <Typography variant="h3"></Typography>
                 <Typography>{profile?.name ?? ""}</Typography>
                 <Typography>{profile?.phone_number}</Typography>
                 <Typography>{outlet?.ntn}</Typography>
@@ -60,14 +66,14 @@ const OutletsView = () => {
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={8}>
-          <Card>
+          <Card sx={{height: '250px'}}>
             <CardHeader
               disableTypography
-              // action={
-              //   <IconButton aria-label="settings">
-              //     <EditIcon />
-              //   </IconButton>
-              // }
+              action={
+                <IconButton aria-label="settings">
+                  <EditIcon />
+                </IconButton>
+              }
               title={<Typography variant="h3">Address Book</Typography>}
             />
             <Grid container direction={"column"} p={2}>
@@ -81,21 +87,21 @@ const OutletsView = () => {
                   <Typography variant="h4" color="textSecondary">
                     Default shipping Address
                   </Typography>
-                  <Typography>{profile?.name ?? ""}</Typography>
+                  <Typography>{!shipping ? profile?.name : shipping?.name ?? ""}</Typography>
                   <Typography>
-                    {profile?.address}{" "}
+                    {!shipping ? profile?.address : shipping?.address}{" "}
                   </Typography>
-                  <Typography>{profile?.phone_number}</Typography>
+                  <Typography>{!shipping ? profile?.phone_number : shipping?.phone_number}</Typography>
                 </Stack>
                 <Stack spacing={1}>
                   <Typography variant="h4" color="textSecondary">
                     Default Billing Address
                   </Typography>
-                  <Typography>{profile?.name ?? ""}</Typography>
+                  <Typography>{!shipping ? profile?.name : shipping?.name ?? ""}</Typography>
                   <Typography>
-                    {profile?.address}{" "}
+                    {!shipping ? profile?.address : shipping?.address}{" "}
                   </Typography>
-                  <Typography>{profile?.phone_number}</Typography>
+                  <Typography>{!shipping ? profile?.phone_number : shipping?.phone_number}</Typography>
                 </Stack>
               </Stack>
             </Grid>

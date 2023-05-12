@@ -20,6 +20,7 @@ import Label from "@/components/label";
 import { makeStyles } from "@mui/styles";
 import axios from "axios";
 import { API_URL } from "../../configuration";
+import moment from "moment/moment";
 
 const TABLE_HEAD = [
   { id: "id", label: "Order ID" },
@@ -176,7 +177,7 @@ const OrdersView = () => {
                   <Typography>{order_id}</Typography>
                 </TableCell>
                 <TableCell sx={{padding: '2px 16px 2px 16px'}}>
-                  <Typography>{Order?.order_date}</Typography>
+                  <Typography>{moment(Order?.order_date).format('DD/MM/YYYY')}</Typography>
                 </TableCell>
                 <TableCell sx={{padding: '2px 16px 2px 16px'}}>
                     <Typography>

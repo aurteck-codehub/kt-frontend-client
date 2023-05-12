@@ -14,18 +14,26 @@ import { useSession } from "next-auth/react";
 import EditIcon from "@mui/icons-material/Edit";
 import { gridSpacing } from "@/utils";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { API_URL } from "@/configuration";
 
 const DashBoard = () => {
   const { data } = useSession();
   const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
+  const [shipping, setShipping] = useState([]);
 
   useEffect(() => {
     const authUser = JSON?.parse(localStorage.getItem("user"));
     setUser(authUser);
     const userProfile = JSON.parse(localStorage.getItem("profile"));
     setProfile(userProfile)
+    axios.get(`${API_URL}/shippingaddress/user/${authUser?.id}`)
+    .then((res) => {
+      setShipping(res.data)
+    })
   },[])
+  console.log({shipping})
   return (
     <MainCard title={`Hi, ${profile?.name ?? ""}`} darkTitle>
       {user?.status === 'inactive' ? 
@@ -35,7 +43,7 @@ const DashBoard = () => {
       :
       <Grid container spacing={gridSpacing}>
         <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{paddingBottom: '4px'}}>
+          <Card sx={{height: '250px'}}>
             <CardHeader
               disableTypography
               action={
@@ -56,7 +64,7 @@ const DashBoard = () => {
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={8}>
-          <Card>
+          <Card sx={{height: '250px'}}>
             <CardHeader
               disableTypography
               action={
@@ -77,21 +85,21 @@ const DashBoard = () => {
                   <Typography variant="h4" color="textSecondary">
                     Default shipping Address
                   </Typography>
-                  <Typography>{profile?.name ?? ""}</Typography>
+                  <Typography>{!shipping ? profile?.name : shipping?.name ?? ""}</Typography>
                   <Typography>
-                    {profile?.address}{" "}
+                    {!shipping ? profile?.address : shipping?.address}{" "}
                   </Typography>
-                  <Typography>{profile?.phone_number}</Typography>
+                  <Typography>{!shipping ? profile?.phone_number : shipping?.phone_number}</Typography>
                 </Stack>
                 <Stack spacing={1}>
                   <Typography variant="h4" color="textSecondary">
                     Default Billing Address
                   </Typography>
-                  <Typography>{profile?.name ?? ""}</Typography>
+                  <Typography>{!shipping ? profile?.name : shipping?.name ?? ""}</Typography>
                   <Typography>
-                    {profile?.address}{" "}
+                    {!shipping ? profile?.address : shipping?.address}{" "}
                   </Typography>
-                  <Typography>{profile?.phone_number}</Typography>
+                  <Typography>{!shipping ? profile?.phone_number : shipping?.phone_number}</Typography>
                 </Stack>
               </Stack>
             </Grid>

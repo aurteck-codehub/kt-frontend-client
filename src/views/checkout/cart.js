@@ -4,7 +4,7 @@ import { Grid, Box, Typography, Stack } from "@mui/material";
 import { Input, Checkbox, PrimaryButton } from "@/components";
 import { useRouter } from "next/navigation";
 
-const Cart = ({totalPrice, discount, num, handleSubmit}) => {
+const Cart = ({totalPrice, discount, totalQuantity, num, handleSubmit}) => {
   const router = useRouter();
 
   const handleClick = (e) => {
@@ -34,9 +34,21 @@ const Cart = ({totalPrice, discount, num, handleSubmit}) => {
             alignItems="center"
             py={1}
           >
-            <Typography>Original Price ({num} Items)</Typography>
+            <Typography>Original Price ({num > 1 ?  `${num} Items` : `${num} Item`})</Typography>
             <Typography size="sm" textAlign="end">
               Rs. <span>{totalPrice}.00</span>
+            </Typography>
+          </Stack>
+          <Stack
+            spacing={0}
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            py={1}
+          >
+            <Typography>Total Quantity</Typography>
+            <Typography size="sm" textAlign="end">
+              <span>{totalQuantity}</span>
             </Typography>
           </Stack>
           <Stack

@@ -11,6 +11,7 @@ import Iconify from '@/components/iconify';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../configuration';
+import moment from 'moment';
 
 const TABLE_HEAD = [
     { id: 'id', label: 'Review Id', alignRight: false },
@@ -113,7 +114,7 @@ const FeaturedProducts = ({ setCurrentRowData, reviewsList, setReviewsList, setO
                                     <Typography>{review_text}</Typography>
                                 </TableCell>
                                 <TableCell align="left">{rating}</TableCell>
-                                <TableCell align="left">{updatedAt}</TableCell>
+                                <TableCell align="left">{moment(updatedAt).format('DD/MM/YYYY')}</TableCell>
                                 <TableCell align="right">
                                     <IconButton size="large" color="inherit" onClick={(e) => handleOpenMenu(e, row)}>
                                         <Iconify icon={'eva:more-vertical-fill'} />
