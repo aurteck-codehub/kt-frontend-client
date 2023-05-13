@@ -1,115 +1,57 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-unused-vars */
 "use client";
-import {
-  Grid,
-  Card,
-  CardHeader,
-  IconButton,
-  Typography,
-  Stack,
-  Divider,
-  Box,
-} from "@mui/material";
-import MainCard from "@/ui-component/cards/MainCard";
-import { useEffect, useState } from "react";
-import EditIcon from "@mui/icons-material/Edit";
-import { gridSpacing } from "@/utils";
-import axios from "axios";
-import { API_URL } from "@/configuration";
+import { useState } from 'react';
+import { Grid, Box } from '@mui/material';
+import Board from './Board';
+import EditShipping from './modal/EditShipping';
+import EditOutlet from './modal/EditOutlet';
 
 const OutletsView = () => {
-  const [user, setUser] = useState([]);
-  const [profile, setProfile] = useState([]);
-  const [outlet, setOutlet] = useState([]);
-  const [shipping, setShipping] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [outletOpen, setOutletOpen] = useState(false);
+    const [currentRowData, setCurrentRowData] = useState({});
+    const [profile, setProfile] = useState([]);
+    const [shipping, setShipping] = useState([]);
+    const [outlet, setOutlet] = useState([]);
 
-  useEffect(() => {
-    const authUser = JSON?.parse(localStorage.getItem("user"));
-    setUser(authUser);
-    axios.get(`${API_URL}/store/user/${authUser?.id}`)
-    .then((res) => {
-      setOutlet(res?.data);
-    })
-    axios.get(`${API_URL}/shippingaddress/user/${authUser?.id}`)
-    .then((res) => {
-      setShipping(res.data)
-    })
-    const userProfile = JSON.parse(localStorage.getItem("profile"));
-    setProfile(userProfile)
-  },[])
-  return (
-    <MainCard title={`My Outlets`} darkTitle>
-      {user?.status === 'inactive' ? 
-      <Typography>
-        Your Application is under review, we will inform you after reviewing your application with in 3 to 4 working days. 
-      </Typography> 
-      :
-      <Grid container spacing={gridSpacing}>
-        <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{height: '250px'}}>
-            <CardHeader
-              disableTypography
-              action={
-                <IconButton aria-label="settings">
-                  <EditIcon />
-                </IconButton>
-              }
-              title={<Typography variant="h3">{outlet?.name}</Typography>}
+    return (
+        <>
+            <>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} mt={5}>
+                        <Grid container spacing={3} direction="column">
+                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                    <Board
+                                        setCurrentRowData={setCurrentRowData}
+                                        profile={profile}
+                                        setProfile={setProfile}
+                                        shipping={shipping}
+                                        setShipping={setShipping}
+                                        outlet={outlet}
+                                        setOutlet={setOutlet}
+                                        setOpen={setOpen}
+                                        setOutletOpen={setOutletOpen}
+                                    />
+                                </Box>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </>
+            <EditShipping
+                currentRowData={currentRowData}
+                setShipping={setShipping} 
+                open={open} 
+                setOpen={setOpen} 
             />
-            <Grid container direction={"column"} p={3}>
-              <Stack spacing={1}>
-                <Typography variant="h3"></Typography>
-                <Typography>{profile?.name ?? ""}</Typography>
-                <Typography>{profile?.phone_number}</Typography>
-                <Typography>{outlet?.ntn}</Typography>
-              </Stack>
-            </Grid>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={8}>
-          <Card sx={{height: '250px'}}>
-            <CardHeader
-              disableTypography
-              action={
-                <IconButton aria-label="settings">
-                  <EditIcon />
-                </IconButton>
-              }
-              title={<Typography variant="h3">Address Book</Typography>}
+            <EditOutlet
+                currentRowData={currentRowData}
+                setOutlet={setOutlet}
+                open={outletOpen}
+                setOpen={setOutletOpen}
             />
-            <Grid container direction={"column"} p={2}>
-              <Stack
-                direction="row"
-                alignItems={"center"}
-                divider={<Divider orientation="vertical" flexItem />}
-                spacing={5}
-              >
-                <Stack spacing={1}>
-                  <Typography variant="h4" color="textSecondary">
-                    Default shipping Address
-                  </Typography>
-                  <Typography>{!shipping ? profile?.name : shipping?.name ?? ""}</Typography>
-                  <Typography>
-                    {!shipping ? profile?.address : shipping?.address}{" "}
-                  </Typography>
-                  <Typography>{!shipping ? profile?.phone_number : shipping?.phone_number}</Typography>
-                </Stack>
-                <Stack spacing={1}>
-                  <Typography variant="h4" color="textSecondary">
-                    Default Billing Address
-                  </Typography>
-                  <Typography>{!shipping ? profile?.name : shipping?.name ?? ""}</Typography>
-                  <Typography>
-                    {!shipping ? profile?.address : shipping?.address}{" "}
-                  </Typography>
-                  <Typography>{!shipping ? profile?.phone_number : shipping?.phone_number}</Typography>
-                </Stack>
-              </Stack>
-            </Grid>
-          </Card>
-        </Grid>
-      </Grid>
-      }
-    </MainCard>
-  )
+        </>
+    );
 };
+
 export default OutletsView;
