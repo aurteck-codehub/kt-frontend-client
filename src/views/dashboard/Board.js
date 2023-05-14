@@ -67,7 +67,7 @@ const DashBoard = ({ profile, setProfile, shipping, setShipping, setCurrentRowDa
               }
               title={<Typography variant="h3">Personal Profile</Typography>}
             />
-            <Grid container direction={"column"} p={3}>
+            <Grid container direction={"column"} p={3} mb={1}>
               <Stack spacing={1}>
                 <Typography variant="h3"></Typography>
                 <Typography>{profile?.name ?? ""}</Typography>
@@ -95,7 +95,7 @@ const DashBoard = ({ profile, setProfile, shipping, setShipping, setCurrentRowDa
                 divider={<Divider orientation="vertical" flexItem />}
                 spacing={5}
               >
-                <Stack spacing={1}>
+                <Stack spacing={1} mb={1}>
                   <Typography variant="h4" color="textSecondary">
                     Default shipping Address
                   </Typography>
@@ -105,7 +105,7 @@ const DashBoard = ({ profile, setProfile, shipping, setShipping, setCurrentRowDa
                   </Typography>
                   <Typography>{!shipping ? profile?.phone_number : shipping?.phone_number}</Typography>
                 </Stack>
-                <Stack spacing={1}>
+                <Stack spacing={1} mb={1}>
                   <Typography variant="h4" color="textSecondary">
                     Default Billing Address
                   </Typography>

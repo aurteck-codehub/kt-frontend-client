@@ -7,7 +7,6 @@ import {
   Typography,
   Stack,
   Divider,
-  Box,
 } from "@mui/material";
 import MainCard from "@/ui-component/cards/MainCard";
 import { useSession } from "next-auth/react";
@@ -68,7 +67,7 @@ const DashBoard = ({ profile, setProfile, shipping, setShipping, setCurrentRowDa
               }
               title={<Typography variant="h3">{outlet?.name}</Typography>}
             />
-            <Grid container direction={"column"} p={3}>
+            <Grid container direction={"column"} p={3} mb={1}>
               <Stack spacing={1}>
                 <Typography variant="h3"></Typography>
                 <Typography>{outlet?.name ?? ""}</Typography>
@@ -96,7 +95,7 @@ const DashBoard = ({ profile, setProfile, shipping, setShipping, setCurrentRowDa
                 divider={<Divider orientation="vertical" flexItem />}
                 spacing={5}
               >
-                <Stack spacing={1}>
+                <Stack spacing={1} mb={1}>
                   <Typography variant="h4" color="textSecondary">
                     Default shipping Address
                   </Typography>
@@ -106,7 +105,7 @@ const DashBoard = ({ profile, setProfile, shipping, setShipping, setCurrentRowDa
                   </Typography>
                   <Typography>{!shipping ? profile?.phone_number : shipping?.phone_number}</Typography>
                 </Stack>
-                <Stack spacing={1}>
+                <Stack spacing={1} mb={1}>
                   <Typography variant="h4" color="textSecondary">
                     Default Billing Address
                   </Typography>
