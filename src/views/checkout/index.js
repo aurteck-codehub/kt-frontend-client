@@ -41,7 +41,7 @@ const CheckOut = () => {
 
   console.log({id})
 
-  const totalPrice = cart?.reduce((sum, item) => sum + parseFloat(item?.Product?.price), 0)
+  const totalPrice = cart?.reduce((sum, item) => sum + (parseFloat(item?.Product?.price) * item?.quantity), 0)
   const totalQuantity = cart?.reduce((sum, item) => sum + item?.quantity, 0);
   const discount = cart?.reduce((acc, { Discount }) => {
     const price = Discount ? Number(Discount?.discount_amount) : 0;
