@@ -219,7 +219,7 @@ const DetailCart = ({shippingAddress, setShippingAddress, contact, setContact}) 
           </Grid>
         </Grid>
       </Box>
-      <Box>
+      {/* <Box>
         <Typography
           variant="h4"
           color="custom.orange"
@@ -283,7 +283,7 @@ const DetailCart = ({shippingAddress, setShippingAddress, contact, setContact}) 
             </Stack>
           </Grid>
         </Grid>
-      </Box>
+      </Box> */}
     </Stack>
   );
 };

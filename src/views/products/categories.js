@@ -218,7 +218,7 @@ const Categories = ({gri}) => {
                 // style={{ textDecoration: "none" }}
               >
                 <Typography color="primary" fontWeight={"bold"}>
-                  {category?.title}
+                  {category?.title?.toUpperCase()}
                 </Typography>
               </div>
             </AccordionSummary>
@@ -233,7 +233,7 @@ const Categories = ({gri}) => {
                           style={{ textDecoration: "none" }}
                         >
                           <Typography color="primary" variant="subtitle1">
-                            {item?.name}
+                            {item?.name?.toUpperCase()}
                           </Typography>
                         </NextLink>
                       </ListItem>
