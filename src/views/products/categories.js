@@ -144,14 +144,11 @@ import {
   Box,
   List,
   ListItem,
-  IconButton,
-  Collapse,
   Accordion,
   AccordionSummary,
   AccordionDetails,
 } from "@mui/material";
 import useSWR from "swr";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import { API_URL } from "@/configuration";
