@@ -4,7 +4,7 @@
 /* eslint-disable react/prop-types */
 "use client";
 import { useState } from 'react';
-import { TableBody, TableRow, TableCell, IconButton, Typography, Checkbox, Popover, MenuItem } from '@mui/material';
+import { TableBody, TableRow, TableCell, IconButton, Typography, Checkbox, Popover, MenuItem, Pagination } from '@mui/material';
 import Table from '@/components/Table';
 import Iconify from '@/components/iconify';
 
@@ -26,6 +26,7 @@ const FeaturedProducts = ({ setCurrentRowData, reviewsList, setReviewsList, setO
     const [selected, setSelected] = useState([]);
     const [open, setOpen] = useState(null);
     const [currentRowId, setCurrentRowId] = useState(null);
+    const [page, setPage] = useState(1);
     const [id, setId] = useState('')
 
     console.log({reviewsList})
@@ -78,11 +79,21 @@ const FeaturedProducts = ({ setCurrentRowData, reviewsList, setReviewsList, setO
         setSelected(newSelected);
     };
 
+    const handlePageChange = (event, value) => {
+        setPage(value);
+    };
+
+    const rowsPerPage = 10; // Number of rows to display per page
+
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+
+    const currentRows = reviewsList?.slice(start, end);
     return (
         <>
             <Table
                 tableHead={TABLE_HEAD}
-                data={reviewsList}
+                data={currentRows}
                 handleDeleteClick={handleDeleteClick}
                 handleEditClick={handleEditClick}
                 showActions
@@ -90,7 +101,7 @@ const FeaturedProducts = ({ setCurrentRowData, reviewsList, setReviewsList, setO
                 setSelected={setSelected}
             >
                 <TableBody>
-                    {reviewsList?.map((row) => {
+                    {currentRows?.map((row) => {
                         const {
                             id,
                             Product,
@@ -152,6 +163,12 @@ const FeaturedProducts = ({ setCurrentRowData, reviewsList, setReviewsList, setO
                     Delete
                 </MenuItem>
             </Popover>
+            <Pagination
+                sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}
+                count={Math.ceil(reviewsList?.length / rowsPerPage)}
+                page={page}
+                onChange={handlePageChange}
+            />
         </>
     );
 };
