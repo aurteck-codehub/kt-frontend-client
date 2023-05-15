@@ -56,7 +56,7 @@ const ProductDetail = ({ id }) => {
           `${API_URL}/product/${res?.data?.Brand?.id}/${res?.data?.Category?.id}`
         )
         .then((res) => {
-          setDiffBrand(res?.data?.products);
+          setDiffBrand(res?.data);
         });
       axios
         .get(`${API_URL}/product/brand/${res?.data?.Brand?.id}`)
