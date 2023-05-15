@@ -26,14 +26,14 @@ import moment from "moment/moment";
 const TABLE_HEAD = [
   { id: "id", label: "Order ID" },
   { id: "created", label: "Placed On" },
-  { id: "item", label: "Item", alignRight: false, isNumber: true },
+  { id: "tracking", label: "Tracking_ID", alignRight: false, isNumber: true },
   {
     id: "fulfillment",
     label: "Fulfillment",
     alignRight: false,
     isNumber: true,
   },
-  { id: "quantity", label: "Quantity", alignRight: false },
+  // { id: "quantity", label: "Quantity", alignRight: false },
   { id: "totalPrice", label: "Total Price", alignRight: false },
   { id: "status", label: "Status", alignRight: false },
   { id: "updated", label: "Updated", alignRight: false },
@@ -163,11 +163,10 @@ const OrdersView = () => {
           {currentRows?.map((row) => {
             const {
               id,
-              order_id,
-              quantity,
-              price,
-              Order,
-              Product,
+              order_date,
+              status,
+              total_amount,
+              tracking,
               updatedAt
             } = row;
             const selectedRow = selected.indexOf(row.id) !== -1;
@@ -187,25 +186,25 @@ const OrdersView = () => {
                   />
                 </TableCell>
                 <TableCell sx={{padding: '2px 16px 2px 16px'}}>
-                  <Typography>{order_id}</Typography>
+                  <Typography>{id}</Typography>
                 </TableCell>
                 <TableCell sx={{padding: '2px 16px 2px 16px'}}>
-                  <Typography>{moment(Order?.order_date).format('DD/MM/YYYY')}</Typography>
+                  <Typography>{moment(order_date).format('DD/MM/YYYY')}</Typography>
                 </TableCell>
                 <TableCell sx={{padding: '2px 16px 2px 16px'}}>
                     <Typography>
-                      {Product?.name}
+                      {tracking}
                     </Typography>
                 </TableCell>
                 <TableCell sx={{padding: '2px 16px 2px 16px'}}>
                   <Label label={'fullfilment'} color="primary" />
                 </TableCell>
-                <TableCell sx={{padding: '2px 16px 2px 16px'}}>{quantity}</TableCell>
-                <TableCell sx={{padding: '2px 16px 2px 16px'}}>{price}</TableCell>
+                {/* <TableCell sx={{padding: '2px 16px 2px 16px'}}>{quantity}</TableCell> */}
+                <TableCell sx={{padding: '2px 16px 2px 16px'}}>{total_amount}</TableCell>
                 <TableCell sx={{padding: '2px 16px 2px 16px'}}>
-                  <Label label={Order?.status} color="primary" />
+                  <Label label={status} color="primary" />
                 </TableCell>
-                <TableCell sx={{padding: '2px 16px 2px 16px'}}>{updatedAt}</TableCell>
+                <TableCell sx={{padding: '2px 16px 2px 16px'}}>{moment(updatedAt).format('DD/MM/YYYY')}</TableCell>
                 <TableCell sx={{padding: '2px 16px 2px 16px'}}>
                   <IconButton
                     size="large"
