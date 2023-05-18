@@ -58,7 +58,6 @@ const CheckOut = () => {
         city: res?.data?.city,
         state: res?.data?.state,
         phone_number: res?.data?.phone_number,
-        // area_id: res?.data?.area_id
       });
       setContactId(res?.data?.id);
     }).catch((err) => {
