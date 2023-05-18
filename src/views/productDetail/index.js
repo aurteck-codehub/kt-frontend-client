@@ -13,18 +13,14 @@ import {
   Button,
   Divider,
 } from "@mui/material";
-import useSWR from "swr";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { NumericFormat } from "react-number-format";
 import ProductSlider from "../products/ProductSlider";
-import { productDetailData } from "@/utils/data";
 import { PrimaryButton, ClientReviews, RatingAndSlider } from "@/components";
 import { API_URL } from "@/configuration";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const ProductDetail = ({ id }) => {
   const router = useRouter();
