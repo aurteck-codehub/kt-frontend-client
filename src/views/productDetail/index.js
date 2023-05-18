@@ -82,6 +82,7 @@ const ProductDetail = ({ id }) => {
   const averageRating = totalRating / numReviews;
 
   console.log({ sameBrand });
+  console.log({ diffBrand })
   const handleClick = (e) => {
     console.log("clicked");
     e.preventDefault();
