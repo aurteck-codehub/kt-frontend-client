@@ -33,20 +33,20 @@ export const NAV_ITEMS = [
 export const OTHER_LINK = [
   {
     label: "Terms & Conditions",
-    href: "/",
+    href: "/terms",
   },
   {
     label: "Privacy Policy",
-    href: "/",
+    href: "/privacypolicy",
   },
-  {
-    label: "Returns",
-    href: "/",
-  },
-  {
-    label: "FAQ's",
-    href: "/",
-  },
+  // {
+  //   label: "Returns",
+  //   href: "/",
+  // },
+  // {
+  //   label: "FAQ's",
+  //   href: "/",
+  // },
 ];
 
 export const features = [
