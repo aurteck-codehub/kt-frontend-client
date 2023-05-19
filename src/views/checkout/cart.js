@@ -1,11 +1,13 @@
 "use client";
+import { useState } from 'react';
 import Link from "next/link";
-import { Grid, Box, Typography, Stack } from "@mui/material";
+import { Button, Grid, Box, Typography, Stack } from "@mui/material";
 import { Input, Checkbox, PrimaryButton } from "@/components";
 import { useRouter } from "next/navigation";
 
 const Cart = ({totalPrice, discount, totalQuantity, num, handleSubmit}) => {
   const router = useRouter();
+  const [check, setCheck] = useState(true);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -91,6 +93,8 @@ const Cart = ({totalPrice, discount, totalQuantity, num, handleSubmit}) => {
         <Input placeholder="Enter Promo Code" />
         <Box py={5}>
           <Checkbox
+            value={check}
+            onChange={(e) => setCheck(!check)}
             label={
               <span>
                 By Clicking the button below, I agree to the{" "}
@@ -109,7 +113,23 @@ const Cart = ({totalPrice, discount, totalQuantity, num, handleSubmit}) => {
             }
           />
         </Box>
-        <PrimaryButton onClick={(e) => handleSubmit(e)} size="sm">Place order</PrimaryButton>
+        {/* <PrimaryButton onClick={(e) => handleSubmit(e)} size="sm">Place order</PrimaryButton> */}
+        <Button
+          variant='contained'
+          size='large'
+          color='primary'
+          onClick={(e) => handleSubmit(e)}
+          disabled={check == true}
+          sx={{
+            fontWeight: "bold",
+            textTransform: "capitalize",
+            boxShadow: "none",
+            padding: "15px 30px",
+            transition: 'opacity 0.3s',
+            opacity: check === true ? 0.5 : 1,
+            pointerEvents: check === true ? 'none' : 'auto',
+          }}
+        >Place order</Button>
       </Grid>
     </Box>
   );

@@ -229,7 +229,8 @@ const ProductDetail = ({ id }) => {
               <RemoveIcon />
             </IconButton>
             <Typography sx={{ color: "custom.gray" }} fontWeight="bold" ml={3}>
-              {parseFloat(detail?.quantity).toFixed()} items left
+              {detail?.quantity > 0 ? `${parseFloat(detail?.quantity).toFixed()} items left` : 'out of stock'}
+              {/* // {parseFloat(detail?.quantity).toFixed() items left */}
             </Typography>
           </Stack>
           <Stack direction={"row"} mt={5}>
