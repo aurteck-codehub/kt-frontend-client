@@ -22,6 +22,7 @@ import { makeStyles } from "@mui/styles";
 import axios from "axios";
 import { API_URL } from "../../configuration";
 import moment from "moment/moment";
+import OrderDetails from './OrderDetails';
 
 const TABLE_HEAD = [
   { id: "id", label: "Order ID" },
@@ -37,6 +38,7 @@ const TABLE_HEAD = [
   { id: "totalPrice", label: "Total Price", alignRight: false },
   { id: "status", label: "Status", alignRight: false },
   { id: "updated", label: "Updated", alignRight: false },
+  { id: 'details', label: 'Details', alignRight: false },
   { id: "" },
 ];
 
@@ -55,6 +57,7 @@ const OrdersView = () => {
   const [selected, setSelected] = useState([]);
   const [open, setOpen] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [openDetails, setOpenDetails] = useState(false);
   const [currentRowId, setCurrentRowId] = useState(null);
   const [currentStatus, setCurrentStatus] = useState('')
   const [orders, setOrders] = useState([]);
@@ -107,6 +110,11 @@ const OrdersView = () => {
     }
   };
   console.log({currentStatus});
+  const handleDetails = (event, row) => {
+    const { id } = row;
+    setCurrentRowId(id);
+    setOpenDetails(true);
+}
   const handleOpenMenu = (event, row) => {
     const { id } = row;
     const { Order } = row;
@@ -205,6 +213,9 @@ const OrdersView = () => {
                   <Label label={status} color="primary" />
                 </TableCell>
                 <TableCell sx={{padding: '2px 16px 2px 16px'}}>{moment(updatedAt).format('DD/MM/YYYY')}</TableCell>
+                <TableCell align="left" sx={{padding: '6px 16px 6px 16px'}} onClick={(e) => handleDetails(e, row)}>
+                  <Label label={"Order details"} sx={{ cursor: 'pointer'}} color="primary" />
+                </TableCell>
                 <TableCell sx={{padding: '2px 16px 2px 16px'}}>
                   <IconButton
                     size="large"
@@ -254,6 +265,9 @@ const OrdersView = () => {
       />
       <Dialog open={openDialog}>
       <Alert onClose={() => setOpenDialog(false)}>{message}</Alert>
+      </Dialog>
+      <Dialog open={openDetails}>
+        <OrderDetails id={currentRowId} setOpenDetails={setOpenDetails}/>
       </Dialog>
     </MainCard>
   );

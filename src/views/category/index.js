@@ -1,5 +1,5 @@
 "use client";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Pagination } from "@mui/material";
 import React, { Suspense, useEffect, useState } from "react";
 import FallBackLoader from "@/components/CircularProgress";
 import Categories from "../products/categories";
@@ -9,12 +9,13 @@ import { Product } from "@/components";
 
 function CategoriesSearch({ id }) {
   const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    axios.get(`${API_URL}/product/sub/cat/${id}`).then((res) => {
+    axios.get(`${API_URL}/product/sub/cat/${id}?page=${page}`).then((res) => {
       setProducts(res?.data);
     });
-  }, []);
+  }, [page]);
   console.log({ products });
   return (
     <Container maxWidth="xl">
@@ -34,6 +35,13 @@ function CategoriesSearch({ id }) {
           </Grid>
         </Grid>
       </Grid>
+      <Pagination
+        sx={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}
+        // component="div"
+        count={products?.totalPages}
+        page={page}
+        onChange={(e, value) => setPage(value)}
+      />
     </Container>
   );
 }
