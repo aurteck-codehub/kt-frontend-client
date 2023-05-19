@@ -9,10 +9,10 @@ const Cart = ({totalPrice, discount, totalQuantity, num, handleSubmit}) => {
   const router = useRouter();
   const [check, setCheck] = useState(true);
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    router.push('/checkout')
-  }  
+  // const handleClick = (e) => {
+  //   e.preventDefault();
+  //   router.push('/checkout')
+  // }
 
   return (
     <Box bgcolor={"custom.grayLight"} px={3} py={2}>
