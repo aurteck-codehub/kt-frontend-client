@@ -6,10 +6,7 @@ import {
   Grid,
   Typography,
   Stack,
-  Rating,
-  IconButton,
-  Button,
-  Divider,
+  IconButton
  } from '@mui/material'
 import React from 'react'
 import { useEffect, useState } from 'react';
