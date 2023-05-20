@@ -5,11 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import useSWR from "swr";
 import Slider from "react-slick";
 import Link from "next/link";
-import Image from "next/image";
 import { inter } from "@/assets/fonts";
 import { Container, Typography, Box, Stack, Button, Grid } from "@mui/material";
 import { PrimaryButton } from "@/components";
-import tempImage from "@/assets/images/bannerImage2.png";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
