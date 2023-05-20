@@ -6,7 +6,7 @@ const Category = ({ index, item, link }) => {
   const theme = useTheme();
   console.log({ item });
   return (
-    <Link style={{ textDecoration: "none" }} href={`/categories/${item?.id}`}>
+    <Link style={{ textDecoration: "none" }} href={`/category/${item?.id}`}>
       <Card sx={{ backgroundColor: theme.palette.custom.grayLight, py: 2 }}>
         <CardContent>
           <Stack

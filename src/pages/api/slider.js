@@ -1,24 +1,28 @@
+import tempsrc from '../../assets/images/bannerImage2.png';
+import babyCare from "../../assets/images/baby.png";
+import drinks from "../../assets/images/drink.png";
+
 function getItems() {
   return {
     slider: [
       {
         id: 1,
         title: "Delivery On Time at your Door Step",
-        slug: "/1",
-        image: "https://picsum.photos/1200",
+        slug: "/products",
+        image: tempsrc,
       },
       {
         id: 2,
-        title: "Delivery On Time at your Door Step2",
+        title: "Delicate care for your little ones: Discover our gentle baby essentials",
         subtitle: "subtitle 2",
-        slug: "/2",
-        image: "https://picsum.photos/1200",
+        slug: "/category/5",
+        image: babyCare,
       },
       {
         id: 3,
-        title: "Delivery On Time at your Door Step3",
-        slug: "/3",
-        image: "https://picsum.photos/1200",
+        title: "Chill out with our refreshing range of icy beverages!",
+        slug: "/category/1",
+        image: drinks,
       },
     ],
   };

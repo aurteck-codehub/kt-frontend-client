@@ -37,10 +37,11 @@ const BannerSlider = () => {
                 direction="row"
                 sx={{
                   height: 500,
-                  backgroundImage: `url(${tempImage.src})`,
+                  backgroundImage: `url(${slide?.image?.src})`,
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center right",
                   backgroundOrigin: "padding-box",
+                  objectFit: "contain",
                 }}
               >
                 <Grid item xs>
@@ -54,16 +55,16 @@ const BannerSlider = () => {
                       >
                         {slide.title}
                       </Typography>
-                      <Typography
+                      {/* <Typography
                         variant="h4"
                         sx={{ py: 2 }}
                         color="custom.orange"
                       >
                         {slide.subtitle ?? ""}
-                      </Typography>
+                      </Typography> */}
                     </Box>
                     <Link href={slide.slug} style={{ textDecoration: "none" }}>
-                      <PrimaryButton>Order Now</PrimaryButton>
+                      <PrimaryButton>Show Now</PrimaryButton>
                     </Link>
                   </Box>
                 </Grid>
