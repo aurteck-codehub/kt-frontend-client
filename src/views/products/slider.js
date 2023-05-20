@@ -53,13 +53,6 @@ const BannerSlider = () => {
                       >
                         {slide.title}
                       </Typography>
-                      {/* <Typography
-                        variant="h4"
-                        sx={{ py: 2 }}
-                        color="custom.orange"
-                      >
-                        {slide.subtitle ?? ""}
-                      </Typography> */}
                     </Box>
                     <Link href={slide.slug} style={{ textDecoration: "none" }}>
                       <PrimaryButton>Show Now</PrimaryButton>
