@@ -93,7 +93,6 @@ const OrderDetails = ({id, setOpenDetails}) => {
             // src="https://via.placeholder.com/1000"
             src={item?.productInfo?.image_url}
             alt="product-image"
-            // style={{ height: '280px', width: '100%'}}
             fill
           />
         </Grid>
