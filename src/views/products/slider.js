@@ -55,7 +55,7 @@ const BannerSlider = () => {
                       </Typography>
                     </Box>
                     <Link href={slide.slug} style={{ textDecoration: "none" }}>
-                      <PrimaryButton>Show Now</PrimaryButton>
+                      <PrimaryButton>Shop Now</PrimaryButton>
                     </Link>
                   </Box>
                 </Grid>
