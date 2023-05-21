@@ -237,6 +237,7 @@ const ProductDetail = ({ id }) => {
             <Button
               variant="contained"
               size="large"
+              disabled={detail?.quantity < 1}
               sx={{
                 textTransform: "capitalize",
                 boxShadow: "none",
@@ -247,9 +248,21 @@ const ProductDetail = ({ id }) => {
             >
               Buy now
             </Button>
-            <PrimaryButton onClick={(e) => handleClick(e)}>
+            <Button 
+              variant="contained" 
+              size="large" 
+              color="primary" 
+              disabled={detail?.quantity < 1}
+              sx={{
+                fontWeight: "bold",
+                textTransform: "capitalize",
+                boxShadow: "none",
+                padding: "15px 30px"
+              }} 
+              onClick={(e) => handleClick(e)}
+              >
               Add to cart
-            </PrimaryButton>
+            </Button>
           </Stack>
         </Grid>
       </Grid>

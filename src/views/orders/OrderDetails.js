@@ -99,7 +99,7 @@ const OrderDetails = ({id, setOpenDetails}) => {
         </Grid>
         <Grid item xs={12} sm="auto">
           <Typography
-            variant="h3"
+            variant="h5"
             sx={{ textTransform: "capitalize", mb: "12px" }}
           >
             {item?.productInfo?.name}
@@ -115,7 +115,7 @@ const OrderDetails = ({id, setOpenDetails}) => {
             </Typography>
           </Typography>
           <Typography
-            variant="h4"
+            variant="h5"
             mt={2}
             sx={{ color: "custom.red" }}
             fontWeight="bold"

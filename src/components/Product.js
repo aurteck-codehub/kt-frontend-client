@@ -50,9 +50,16 @@ const Product = ({ index, item, link }) => {
               height={200}
             />
             <Typography color="black">{item?.name}</Typography>
+            <Stack direction="row">
             <Typography variant="h6" color="custom.red" fontWeight={"bold"}>
               Rs. {item?.price}
             </Typography>
+            {item?.quantity < 1 ?
+            <Typography variant="p" color="red" fontSize="11px" marginLeft="10px">
+              *Out of Stock
+            </Typography>
+            : ''}
+            </Stack>
             <Stack direction={"row"}>
               <Rating
                 name="text-feedback"
