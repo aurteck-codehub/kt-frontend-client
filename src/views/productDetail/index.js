@@ -121,7 +121,6 @@ const ProductDetail = ({ id }) => {
           }}
         >
           <Image
-            // src="https://via.placeholder.com/1000"
             src={detail?.image_url}
             alt="product-image"
             fill
