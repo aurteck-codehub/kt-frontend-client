@@ -368,7 +368,7 @@ const AuthRegister = () => {
                   fullWidth
                   error={Boolean(touched.area_id && errors.area_id)}
                 >
-                  <InputLabel htmlFor="add-area_id">Area*</InputLabel>
+                  <InputLabel htmlFor="add-area_id">Area (optional)</InputLabel>
                   <Select
                     fullWidth
                     sx={{ borderRadius: "15px", backgroundColor: "#D9D9D9" }}
@@ -395,7 +395,7 @@ const AuthRegister = () => {
                 <Stack spacing={1}>
                   <Input
                     fullWidth
-                    label="NTN Number*"
+                    label="NTN Number (optional)"
                     labelHtml="ntn number"
                     error={Boolean(touched.ntn && errors.ntn)}
                     id="ntn"
@@ -436,7 +436,7 @@ const AuthRegister = () => {
                 </Stack>
               </Grid>
               <Grid item xs={12}>
-                <Typography sx={{ color: "#000" }}>Upload CNIC*</Typography>
+                <Typography sx={{ color: "#000" }}>Upload CNIC (optional)</Typography>
               </Grid>
               <Input
                 id="file-inp"
