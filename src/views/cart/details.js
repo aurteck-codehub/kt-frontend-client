@@ -31,7 +31,7 @@ const DetailCart = ({cart, setCart, userId, newQuantity, setNewQuantity}) => {
         quantity: newQuantity
       });
       setNewQuantity(newQuantity)
-      console.log(response.data);
+      console.log(response.data); // log the updated cart item
     } catch (error) {
       console.error(error);
     }
