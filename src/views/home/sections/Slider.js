@@ -33,7 +33,7 @@ const SupplyPartnersSlider = () => {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
-          dots: true,
+          dots: false,
         },
       },
       {
