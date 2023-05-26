@@ -170,6 +170,11 @@ const Navbar = () => {
                     </Tooltip>
                   </>
                 ) : (
+                  // <NextLink href="/login">
+                  //   <IconButton size="medium">
+                  //     <PersonOutlineIcon sx={{ color: "custom.green" }} />
+                  //   </IconButton>
+                  // </NextLink>
                   <Box sx={{display: 'flex'}}>
                   <Box sx={{ px: 0, paddingRight: '15px' }}>
                       <NextLink
