@@ -33,15 +33,15 @@ const SupplyPartnersSlider = () => {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
-          dots: false,
+          dots: true,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
           slidesToScroll: 1,
-          dots: false,
+          dots: true,
         },
       },
     ],
