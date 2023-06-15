@@ -346,13 +346,13 @@ const Footer = () => {
                     style={{ color: "white", textDecoration: "none" }}>
                     karobartechnologies Pvt. Ltd.
                   </NextLink>{" "}
-                  Designed & Developed by{" "}
+                  {/* Designed & Developed by{" "}
                   <NextLink
                     href="https://www.aurteck.com/"
                     target="_blank"
                     style={{ color: "white", textDecoration: "none" }}>
                     AURTeck Pvt. Ltd.
-                  </NextLink>
+                  </NextLink> */}
                 </Typography>
               </Box>
             </Box>

@@ -49,7 +49,7 @@ const Dashboard = () => {
           romotions
         </Typography>
         <Grid container justifyContent={"flex-end"} py={3}>
-          <NextLink href={"/"} style={{ textDecoration: "none" }}>
+          <NextLink href={"/topSelling"} style={{ textDecoration: "none" }}>
             <Typography variant="body2" color="custom.red">
               See more
             </Typography>
@@ -89,7 +89,7 @@ const Dashboard = () => {
           </Grid>
         </Grid>
         <Grid container justifyContent={"flex-end"} py={3}>
-          <NextLink href={"/"} style={{ textDecoration: "none" }}>
+          <NextLink href={"/topSelling"} style={{ textDecoration: "none" }}>
             <Typography variant="body2" color="custom.red">
               See more
             </Typography>
@@ -156,9 +156,9 @@ const Dashboard = () => {
         </Grid>
         <Grid container justifyContent={"flex-end"} py={3}>
           <NextLink href={"/"} style={{ textDecoration: "none" }}>
-            <Typography variant="body2" color="custom.red">
+            {/* <Typography variant="body2" color="custom.red">
               See more
-            </Typography>
+            </Typography> */}
           </NextLink>
         </Grid>
         <Box mb={10}>

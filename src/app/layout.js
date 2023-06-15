@@ -13,6 +13,7 @@ import store from "@/store";
 import { BackToTop } from "@/components";
 
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en" className={`${roboto.variable} ${inter.variable}`}>
       <head />
@@ -23,7 +24,7 @@ export default function RootLayout({ children }) {
               <NavBar />
               {children}
               <BackToTop />
-              <Footer />
+              <Footer id="contact"/>
             </MaterialWrapper>
           </SessionProvider>
         </Provider>

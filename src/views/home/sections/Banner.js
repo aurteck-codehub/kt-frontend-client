@@ -5,7 +5,16 @@ import Image from "next/image";
 import { Box, Container, Typography, Button, Grid } from "@mui/material";
 import { inter } from "@/assets/fonts";
 import bannerImage from "@/assets/images/bannerImage.png";
+import { useRouter } from "next/navigation";
+
 const Banner = () => {
+  const router = useRouter();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    router.push('/aboutUs')
+    console.log('pushed')
+  }
   return (
     <Box
       sx={{
@@ -43,6 +52,7 @@ const Banner = () => {
         <Box sx={{ py: 3 }}>
           <Button
             className={inter.className}
+            onClick={handleClick}
             variant="contained"
             sx={{
               bgcolor: "custom.green",
