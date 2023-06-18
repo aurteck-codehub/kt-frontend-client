@@ -6,6 +6,7 @@ import {
   OutlinedInput,
   InputAdornment,
   Grid,
+  Pagination,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
@@ -16,16 +17,21 @@ import { Product } from "@/components";
 const DashboardLayout = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     if(name == "") {
         setProducts(null);
     } else {
-      axios.get(`${API_URL}/product/name/keyword/${name}`).then((res) => {
-        setProducts(res?.data);
+      axios.get(`${API_URL}/product/name/keyword/${name}?page=${page}`).then((res) => {
+        setProducts(res?.data?.result);
+        setTotalPages(res?.data?.totalPages);
       });
     }
-  }, [name]);
+  }, [name, page]);
+
+  console.log({products})
 
   return (
     <Box mt={"40px"} display="flex" flex={1} flexDirection="column">
@@ -60,6 +66,7 @@ const DashboardLayout = ({ children }) => {
           </Container>
         </Stack>
         {products?.length ? (
+          <>
           <Grid container>
             {products?.map((item, index) => (
               <Grid item xs={12} md={3}>
@@ -67,6 +74,13 @@ const DashboardLayout = ({ children }) => {
               </Grid>
             ))}
           </Grid>
+          <Pagination
+            sx={{display: 'flex', justifyContent: 'flex-end', marginBottom: '10px'}}
+            count={totalPages}
+            page={page}
+            onChange={(e, value) => setPage(value)}
+          />
+          </>
         ) : (
           <>
           { children }
