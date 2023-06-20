@@ -52,7 +52,7 @@ const Banner = () => {
         <Box sx={{ py: 3 }}>
           <Button
             className={inter.className}
-            onClick={handleClick}
+            onClick={(e) => handleClick(e)}
             variant="contained"
             sx={{
               bgcolor: "custom.green",

@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import CircleIcon from '@mui/icons-material/Circle';
 
 import React from "react";
 
@@ -112,31 +113,31 @@ const AboutPage = () => {
       <List>
         <ListItem>
           <ListItemIcon>
-            <ArrowRightAltIcon />
+            <CircleIcon />
           </ListItemIcon>
           <ListItemText>Be Bold & Move Fast</ListItemText>
         </ListItem>
         <ListItem>
           <ListItemIcon>
-            <ArrowRightAltIcon />
+            <CircleIcon />
           </ListItemIcon>
           <ListItemText>Empower individuals</ListItemText>
         </ListItem>
         <ListItem>
           <ListItemIcon>
-            <ArrowRightAltIcon />
+            <CircleIcon />
           </ListItemIcon>
           <ListItemText>Customer Centric</ListItemText>
         </ListItem>
         <ListItem>
           <ListItemIcon>
-            <ArrowRightAltIcon />
+            <CircleIcon />
           </ListItemIcon>
           <ListItemText>Collaboration</ListItemText>
         </ListItem>
         <ListItem>
           <ListItemIcon>
-            <ArrowRightAltIcon />
+            <CircleIcon />
           </ListItemIcon>
           <ListItemText>Work with respect</ListItemText>
         </ListItem>
